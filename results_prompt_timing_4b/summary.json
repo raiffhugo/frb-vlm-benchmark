@@ -1,0 +1,95 @@
+{
+  "arms": {
+    "binary_full": {
+      "binary_accuracy": 0.91,
+      "distinct_probabilities": {
+        "0.05": 9,
+        "0.1": 33,
+        "0.15": 72,
+        "0.85": 74,
+        "0.9": 11,
+        "0.92": 1
+      },
+      "parse_failures": 0,
+      "response_chars_mean": 518.195,
+      "seconds_max": 6.241636110993568,
+      "seconds_mean": 5.928494496576023,
+      "seconds_median": 5.920162232476287,
+      "seconds_min": 5.766953058016952,
+      "seconds_p10": 5.848104609415168,
+      "seconds_p90": 6.028900220699143
+    },
+    "binary_lean": {
+      "binary_accuracy": 0.91,
+      "distinct_probabilities": {
+        "0.05": 5,
+        "0.1": 111,
+        "0.85": 23,
+        "0.9": 7,
+        "0.95": 54
+      },
+      "parse_failures": 0,
+      "response_chars_mean": 42.765,
+      "seconds_max": 0.8582676759688184,
+      "seconds_mean": 0.8086094152607256,
+      "seconds_median": 0.8206711989769246,
+      "seconds_min": 0.7845373299787752,
+      "seconds_p10": 0.7866351265867706,
+      "seconds_p90": 0.8237285580951721
+    },
+    "binary_lean_reason": {
+      "binary_accuracy": 0.93,
+      "distinct_probabilities": {
+        "0.05": 9,
+        "0.1": 102,
+        "0.15": 1,
+        "0.25": 1,
+        "0.35": 1,
+        "0.55": 2,
+        "0.65": 1,
+        "0.75": 8,
+        "0.85": 1,
+        "0.95": 74
+      },
+      "parse_failures": 0,
+      "response_chars_mean": 195.78,
+      "seconds_max": 2.2995405410183594,
+      "seconds_mean": 1.783318020948209,
+      "seconds_median": 1.7801367399806622,
+      "seconds_min": 1.472977634985,
+      "seconds_p10": 1.5410446425841655,
+      "seconds_p90": 2.0876219427154865
+    },
+    "multiclass": {
+      "binarized_accuracy": 0.945,
+      "multiclass_accuracy": 0.865,
+      "parse_failures": 0,
+      "response_chars_mean": 179.915,
+      "seconds_max": 2.021319160994608,
+      "seconds_mean": 1.6908800983300898,
+      "seconds_median": 1.6785423044930212,
+      "seconds_min": 1.4425843670032918,
+      "seconds_p10": 1.5740604058082681,
+      "seconds_p90": 1.848174290312454
+    }
+  },
+  "label_agreement_vs_full": {
+    "binary_lean": {
+      "agreement_with_full": 0.99,
+      "compared_samples": 200
+    },
+    "binary_lean_reason": {
+      "agreement_with_full": 0.97,
+      "compared_samples": 200
+    }
+  },
+  "model": "google/gemma-4-E4B-it",
+  "n_samples": 200,
+  "prompt_chars": {
+    "binary_full": 3394,
+    "binary_lean": 1421,
+    "binary_lean_reason": 1529,
+    "multiclass": 2313
+  },
+  "seed": 42
+}

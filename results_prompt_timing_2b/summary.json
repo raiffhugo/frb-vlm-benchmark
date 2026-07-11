@@ -1,0 +1,91 @@
+{
+  "arms": {
+    "binary_full": {
+      "binary_accuracy": 0.93,
+      "distinct_probabilities": {
+        "0.15": 105,
+        "0.25": 7,
+        "0.85": 88
+      },
+      "parse_failures": 0,
+      "response_chars_mean": 524.35,
+      "seconds_max": 4.330365984002128,
+      "seconds_mean": 4.057268019524054,
+      "seconds_median": 4.050782055477612,
+      "seconds_min": 3.9305043880012818,
+      "seconds_p10": 3.990339925169246,
+      "seconds_p90": 4.131484562938567
+    },
+    "binary_lean": {
+      "binary_accuracy": 0.805,
+      "distinct_probabilities": {
+        "0.0": 106,
+        "0.01": 31,
+        "0.85": 22,
+        "0.97": 22,
+        "0.98": 19
+      },
+      "parse_failures": 0,
+      "response_chars_mean": 43.21,
+      "seconds_max": 0.6017587529495358,
+      "seconds_mean": 0.5633878428564639,
+      "seconds_median": 0.5649908875057008,
+      "seconds_min": 0.5345304489601403,
+      "seconds_p10": 0.5406913173093926,
+      "seconds_p90": 0.589011830923846
+    },
+    "binary_lean_reason": {
+      "binary_accuracy": 0.93,
+      "distinct_probabilities": {
+        "0.01": 106,
+        "0.15": 1,
+        "0.18": 3,
+        "0.6": 5,
+        "0.65": 16,
+        "0.75": 3,
+        "0.85": 15,
+        "0.95": 33,
+        "0.97": 18
+      },
+      "parse_failures": 0,
+      "response_chars_mean": 181.74,
+      "seconds_max": 1.5799830469768494,
+      "seconds_mean": 1.1627829292352545,
+      "seconds_median": 1.1340716974809766,
+      "seconds_min": 1.0660974850179628,
+      "seconds_p10": 1.0774071137828287,
+      "seconds_p90": 1.2736587993858848
+    },
+    "multiclass": {
+      "binarized_accuracy": 0.93,
+      "multiclass_accuracy": 0.815,
+      "parse_failures": 0,
+      "response_chars_mean": 173.29,
+      "seconds_max": 1.510548202029895,
+      "seconds_mean": 1.245107090025558,
+      "seconds_median": 1.2331838024838362,
+      "seconds_min": 1.11687050096225,
+      "seconds_p10": 1.1849434662202838,
+      "seconds_p90": 1.3697768821555656
+    }
+  },
+  "label_agreement_vs_full": {
+    "binary_lean": {
+      "agreement_with_full": 0.875,
+      "compared_samples": 200
+    },
+    "binary_lean_reason": {
+      "agreement_with_full": 0.98,
+      "compared_samples": 200
+    }
+  },
+  "model": "google/gemma-4-E2B-it",
+  "n_samples": 200,
+  "prompt_chars": {
+    "binary_full": 3394,
+    "binary_lean": 1421,
+    "binary_lean_reason": 1529,
+    "multiclass": 2313
+  },
+  "seed": 42
+}
