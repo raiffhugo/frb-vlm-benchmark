@@ -1,0 +1,19 @@
+Prompt timing experiment report
+
+samples: 200
+prompt chars [binary_full]: 3394
+prompt chars [binary_lean]: 1421
+prompt chars [binary_lean_reason]: 1529
+prompt chars [multiclass]: 2313
+
+binary_full: mean=4.06s median=4.05s p10=3.99s p90=4.13s chars=524 parse_failures=0
+  binary accuracy @0.5: 0.9300
+binary_lean: mean=0.56s median=0.56s p10=0.54s p90=0.59s chars=43 parse_failures=0
+  binary accuracy @0.5: 0.8050
+binary_lean_reason: mean=1.16s median=1.13s p10=1.08s p90=1.27s chars=182 parse_failures=0
+  binary accuracy @0.5: 0.9300
+multiclass: mean=1.25s median=1.23s p10=1.18s p90=1.37s chars=173 parse_failures=0
+  multiclass accuracy: 0.8150 (binarized: 0.9300)
+
+binary_lean vs binary_full label agreement: 0.8750 over 200 samples
+binary_lean_reason vs binary_full label agreement: 0.9800 over 200 samples

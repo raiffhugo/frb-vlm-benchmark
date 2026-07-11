@@ -1,0 +1,17 @@
+FRB SVLM classification report
+
+Total samples: 2000
+Evaluated samples: 2000
+Skipped samples: 0
+Samples with model error: 0
+Samples with invalid labels: 0
+
+              precision    recall  f1-score   support
+
+         FRB     0.9728    0.8240    0.8923      1000
+     NON_FRB     0.8474    0.9770    0.9076      1000
+
+    accuracy                         0.9005      2000
+   macro avg     0.9101    0.9005    0.8999      2000
+weighted avg     0.9101    0.9005    0.8999      2000
+

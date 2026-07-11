@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Regenerated at runtime (~60 GB when fully rebuilt); only the metadata
+# manifests referenced in the paper are tracked.
+dataset/*
+!dataset/metadata/
+dataset/metadata/*
+!dataset/metadata/labels.jsonl
+!dataset/metadata/labels.csv
+!dataset/metadata/image_manifest.jsonl
+!dataset/metadata/burst_visibility_sim.csv
+dataset_binary/*
+!dataset_binary/metadata/
+dataset_binary/metadata/*
+!dataset_binary/metadata/labels.jsonl
+!dataset_binary/metadata/labels.csv
+!dataset_binary/metadata/image_manifest.jsonl
+results/
+logs/
+
+# Real FAST-FREX data. The PSRFITS files are 244-488 MB each (~412 GB for the
+# full set) and are downloaded from ScienceDB by fetch_fast_frex.py; only the
+# manifests, the visibility diagnostic and the file index are tracked.
+fast_frex/*
+!fast_frex/*.csv
+!fast_frex/scidb_index.json
+
+# Images rendered by prepare-real (~800 MB). Only the manifest that documents
+# the preprocessing of every sample is tracked, plus the three spectra shown in
+# the article figure.
+dataset_real_full/*
+!dataset_real_full/metadata/
+dataset_real_full/metadata/*
+!dataset_real_full/metadata/image_manifest.jsonl
+!dataset_real_full/images/
+dataset_real_full/images/*
+!dataset_real_full/images/samples/
+dataset_real_full/images/samples/*
+!dataset_real_full/images/samples/sample_000320.png
+!dataset_real_full/images/samples/sample_000477.png
+!dataset_real_full/images/samples/sample_000616.png
+
+# SimulateSearch temporary outputs
+*.dat
+*.sf
+*.fits.tmp
+
+# Local/editor files
+.env
+.env.*
+.DS_Store
+.idea/
+.vscode/
+.claude/
+CLAUDE.md
+AGENTS.md

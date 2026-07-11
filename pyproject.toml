@@ -1,0 +1,47 @@
+[project]
+name = "frb-vlm-benchmark"
+version = "0.1.0"
+description = "Modular pipeline to benchmark Vision-Language Models on Fast Radio Burst detection in dynamic spectra."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "accelerate>=1.0",
+    "astropy>=6.0",
+    "huggingface_hub>=0.24",
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+    "Pillow>=10.0",
+    "PyYAML>=6.0",
+    "scikit-learn>=1.4",
+    "torch>=2.3",
+    "torchvision>=0.18",
+    "transformers>=5.7",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+# Cross-check backend for the PSRFITS decode: the same library used by the
+# FETCH / your_candmaker pipelines. Optional -- prepare-real defaults to the
+# built-in astropy reader.
+real = [
+    "your>=0.6",
+]
+
+[project.urls]
+Repository = "https://github.com/raiffhugo/frb-vlm-benchmark"
+Paper = "https://arxiv.org/abs/2607.07382"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = [
+    "benchmark_export",
+    "benchmark_predictions",
+    "simulate_dataset",
+    "plot_dataset",
+    "prepare_real",
+    "vlm_classifier",
+    "evaluation",
+]

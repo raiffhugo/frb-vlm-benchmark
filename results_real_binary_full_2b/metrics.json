@@ -1,0 +1,52 @@
+{
+  "accuracy": 0.730625,
+  "classes": [
+    "FRB",
+    "NON_FRB"
+  ],
+  "confusion_matrix": [
+    [
+      171,
+      429
+    ],
+    [
+      2,
+      998
+    ]
+  ],
+  "error_count": 0,
+  "evaluated_count": 1600,
+  "f1_per_class": {
+    "FRB": 0.4424320827943079,
+    "NON_FRB": 0.8224145035022662
+  },
+  "invalid_count": 0,
+  "macro_f1": 0.632423293148287,
+  "per_class": {
+    "FRB": {
+      "f1_score": 0.4424320827943079,
+      "precision": 0.9884393063583815,
+      "recall": 0.285,
+      "support": 600
+    },
+    "NON_FRB": {
+      "f1_score": 0.8224145035022662,
+      "precision": 0.6993693062368606,
+      "recall": 0.998,
+      "support": 1000
+    }
+  },
+  "precision_per_class": {
+    "FRB": 0.9884393063583815,
+    "NON_FRB": 0.6993693062368606
+  },
+  "recall_per_class": {
+    "FRB": 0.285,
+    "NON_FRB": 0.998
+  },
+  "skipped_count": 0,
+  "skipped_samples": [],
+  "task": "frb-binary",
+  "total_count": 1600,
+  "weighted_f1": 0.6799210957367818
+}

@@ -1,0 +1,52 @@
+{
+  "title": "frb-vlm-benchmark: a zero-shot Vision-Language Model benchmark for Fast Radio Burst detection",
+  "description": "Code, data manifests and per-sample results for 'Generalist Vision-Language Models for Fast Radio Burst detection: a zero-shot benchmark against a specialized detector' (arXiv:2607.07382), as submitted to The Astrophysical Journal Supplement Series.",
+  "upload_type": "software",
+  "license": "MIT",
+  "creators": [
+    {
+      "name": "Santos, Raiff H.",
+      "orcid": "0009-0009-4616-3183",
+      "affiliation": "Universidade Federal de Campina Grande"
+    },
+    {
+      "name": "Queiroz, Amílcar R.",
+      "orcid": "0000-0002-4785-5589",
+      "affiliation": "Universidade Federal de Campina Grande"
+    },
+    {
+      "name": "Duarte, Tharcísyo S. S.",
+      "orcid": "0000-0002-6164-1915",
+      "affiliation": "Universidade Federal do Cariri"
+    },
+    {
+      "name": "de Farias, K. E. L.",
+      "orcid": "0000-0002-9418-9566",
+      "affiliation": "Universidade Federal de Campina Grande"
+    },
+    {
+      "name": "Batista, Rafael A.",
+      "orcid": "0000-0002-7906-1505",
+      "affiliation": "Universidade Federal de Campina Grande"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "arXiv:2607.07382",
+      "relation": "isSupplementTo",
+      "scheme": "arxiv"
+    },
+    {
+      "identifier": "10.57760/sciencedb.15070",
+      "relation": "cites",
+      "scheme": "doi"
+    }
+  ],
+  "keywords": [
+    "fast radio bursts",
+    "vision-language models",
+    "radio astronomy",
+    "machine learning",
+    "zero-shot classification"
+  ]
+}

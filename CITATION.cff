@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "frb-vlm-benchmark: a zero-shot Vision-Language Model benchmark for Fast Radio Burst detection"
+type: software
+authors:
+  - family-names: "Santos"
+    given-names: "Raiff H."
+    orcid: "https://orcid.org/0009-0009-4616-3183"
+repository-code: "https://github.com/raiffhugo/frb-vlm-benchmark"
+license: MIT
+preferred-citation:
+  type: article
+  title: "Generalist Vision-Language Models for Fast Radio Burst detection: a zero-shot benchmark against a specialized detector"
+  authors:
+    - family-names: "Santos"
+      given-names: "Raiff H."
+      orcid: "https://orcid.org/0009-0009-4616-3183"
+    - family-names: "Queiroz"
+      given-names: "Amílcar R."
+      orcid: "https://orcid.org/0000-0002-4785-5589"
+    - family-names: "Duarte"
+      given-names: "Tharcísyo S. S."
+      orcid: "https://orcid.org/0000-0002-6164-1915"
+    - family-names: "de Farias"
+      given-names: "K. E. L."
+      orcid: "https://orcid.org/0000-0002-9418-9566"
+    - family-names: "Batista"
+      given-names: "Rafael A."
+      orcid: "https://orcid.org/0000-0002-7906-1505"
+  year: 2026
+  url: "https://arxiv.org/abs/2607.07382"
+  identifiers:
+    - type: other
+      value: "arXiv:2607.07382"
+      description: "arXiv preprint"

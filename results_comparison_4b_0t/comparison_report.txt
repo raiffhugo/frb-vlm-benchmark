@@ -1,0 +1,26 @@
+Model comparison report
+
+accuracy: VLM=0.9005 | external=0.9285 | delta=-0.0280
+macro_f1: VLM=0.8999 | external=0.9281 | delta=-0.0282
+weighted_f1: VLM=0.8999 | external=0.9281 | delta=-0.0282
+
+Sample-level comparison:
+- common_count: 2000
+- agreement_count: 1700
+- disagreement_count: 300
+- vlm_only_correct_count: 122
+- external_only_correct_count: 178
+- both_correct_count: 1679
+- both_wrong_count: 21
+- vlm_only_sample_count: 0
+- external_only_sample_count: 0
+
+Binary probabilistic analysis:
+- paired_score_count: 2000
+- class_balance: positive=1000 | negative=1000 | positive_fraction=0.5000
+- average_precision: VLM=0.8991 | external=1.0000
+- roc_auc: VLM=0.9248 | external=1.0000
+- brier_score: VLM=0.0908 | external=0.0546
+- ece: VLM=0.0680 | external=0.1042
+- delta_average_precision_vlm_minus_external: -0.1009 CI95=[-0.1186, -0.0849]
+- score_source: parsed_response.frb_probability; the root-level confidence was not used for ROC/PR.
