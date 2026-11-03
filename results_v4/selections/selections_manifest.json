@@ -1,0 +1,122 @@
+{
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/selections.py",
+    "write"
+  ],
+  "created_utc": "2026-10-19T15:31:46+00:00",
+  "experiment": "selections-E4-E5-E6",
+  "git": {
+    "commit": "f56b07da36568c8fd52594c0f11e3e32e31f2f46",
+    "tracked_worktree_dirty": false
+  },
+  "inputs": {
+    "binary_manifest": {
+      "path": "dataset_binary/metadata/image_manifest.jsonl",
+      "sha256": "c02046dfa9bd96f14b127f9236431f6b97c001b9ff540ed17a37625a7838edef"
+    },
+    "real_manifest": {
+      "path": "dataset_real_full/metadata/image_manifest.jsonl",
+      "sha256": "83aaf804659c608661ff5638ba0106ca9585c4230be9656ec1b0f5d5c2447b81"
+    },
+    "visibility": {
+      "path": "fast_frex/burst_visibility_full.csv",
+      "sha256": "e57d66944e33f24ec443e8539026db46627d96ac00b66451c9aed7cde499afdc"
+    }
+  },
+  "quotas": {
+    "e5_humans": [
+      25,
+      45,
+      60,
+      45,
+      25
+    ],
+    "e6_r200": [
+      20,
+      20,
+      20,
+      20,
+      20
+    ]
+  },
+  "seed": 20261013,
+  "selections": {
+    "e4_audit": {
+      "composition": {
+        "negative": 200
+      },
+      "n": 200,
+      "path": "results_v4/selections/e4_audit.jsonl",
+      "sha256": "3c69f5b54c61a2e4438bda1d9579c673755497e480187e1c74f60982d9aa2a23"
+    },
+    "e5_humans": {
+      "composition": {
+        ">= 30": 25,
+        "[0, 5)": 25,
+        "[15, 30)": 45,
+        "[5, 8)": 45,
+        "[8, 15)": 60,
+        "negative": 100
+      },
+      "n": 300,
+      "path": "results_v4/selections/e5_humans.jsonl",
+      "sha256": "e24bec1a500d1459f4d1617683f1924cff1c7b9938c3104dfebc35b682f404fc"
+    },
+    "e6_r200": {
+      "composition": {
+        ">= 30": 20,
+        "[0, 5)": 20,
+        "[15, 30)": 20,
+        "[5, 8)": 20,
+        "[8, 15)": 20,
+        "negative": 100
+      },
+      "n": 200,
+      "path": "results_v4/selections/e6_r200.jsonl",
+      "sha256": "6663a68da30aee978a13c6d5e4c28ced0108c3b4b60dfc48ca4187f648b35571"
+    },
+    "e6_s200": {
+      "matches_table10": true,
+      "n": 200,
+      "path": "results_v4/selections/e6_s200.jsonl",
+      "sha256": "421808e28e4bdbd001c7a84b483cea38015b14dc011a97066e61b4fa3b95717b"
+    }
+  },
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  },
+  "strata": [
+    [
+      0.0,
+      5.0
+    ],
+    [
+      5.0,
+      8.0
+    ],
+    [
+      8.0,
+      15.0
+    ],
+    [
+      15.0,
+      30.0
+    ],
+    [
+      30.0,
+      null
+    ]
+  ],
+  "streams": {
+    "e4_audit": 2,
+    "e5_humans": 1,
+    "e6_r200": 0
+  }
+}

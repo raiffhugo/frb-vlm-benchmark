@@ -1,0 +1,187 @@
+{
+  "bootstrap": {
+    "iterations": 10000,
+    "seed": 42
+  },
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e5_cnn.py",
+    "analyze-offburst"
+  ],
+  "created_utc": "2026-10-20T01:55:00+00:00",
+  "experiment": "E5-CNN-offburst-analysis",
+  "git": {
+    "commit": "68bfbaec4f49be838647a11404466d3a0c5fa39e",
+    "tracked_worktree_dirty": false
+  },
+  "margin_s": 0.5,
+  "results": {
+    "e2b": {
+      "0.5": {
+        "c4_discounted": {
+          "cnn_recall": 0.9353099730458221,
+          "cnn_recall_discounted": 0.9326254150568776,
+          "delta_discounted": 0.8194178678870663,
+          "holds": true,
+          "n": 371,
+          "off_burst_rate_used": 0.03984526199620907,
+          "vlm_recall": 0.11320754716981132
+        },
+        "thresholds_by_model_fold": {
+          "0": 0.5,
+          "1": 0.5
+        },
+        "window_rates": {
+          "negative": {
+            "estimate": 0.017333333333333333,
+            "files": 1000,
+            "flagged": 104,
+            "high": 0.020833333333333332,
+            "low": 0.014,
+            "windows": 6000
+          },
+          "off_burst": {
+            "estimate": 0.028594122319301033,
+            "files": 576,
+            "flagged": 36,
+            "high": 0.03984526199620907,
+            "low": 0.01863844790964092,
+            "windows": 1259
+          },
+          "off_burst_minus_negative": {
+            "estimate": 0.0112607889859677,
+            "high": 0.02301836806001932,
+            "low": 0.0005691613408125173
+          }
+        }
+      },
+      "vlm_fpr": {
+        "c4_discounted": {
+          "cnn_recall": 0.889487870619946,
+          "cnn_recall_discounted": 0.8886100935795962,
+          "delta_discounted": 0.7754025464097849,
+          "holds": true,
+          "n": 371,
+          "off_burst_rate_used": 0.007880220646178092,
+          "vlm_recall": 0.11320754716981132
+        },
+        "thresholds_by_model_fold": {
+          "0": 0.8524448275566101,
+          "1": 0.6960616111755371
+        },
+        "window_rates": {
+          "negative": {
+            "estimate": 0.0013333333333333333,
+            "files": 1000,
+            "flagged": 8,
+            "high": 0.0023333333333333335,
+            "low": 0.0005,
+            "windows": 6000
+          },
+          "off_burst": {
+            "estimate": 0.003971405877680699,
+            "files": 576,
+            "flagged": 5,
+            "high": 0.007880220646178092,
+            "low": 0.0007980845969672786,
+            "windows": 1259
+          },
+          "off_burst_minus_negative": {
+            "estimate": 0.0026380725443473658,
+            "high": 0.006622116149562451,
+            "low": -0.0005692544495978554
+          }
+        }
+      },
+      "vlm_fpr_real": 0.002
+    },
+    "e4b": {
+      "0.5": {
+        "c4_discounted": {
+          "cnn_recall": 0.9353099730458221,
+          "cnn_recall_discounted": 0.9326254150568776,
+          "delta_discounted": 0.8463720457846404,
+          "holds": true,
+          "n": 371,
+          "off_burst_rate_used": 0.03984526199620907,
+          "vlm_recall": 0.0862533692722372
+        },
+        "thresholds_by_model_fold": {
+          "0": 0.5,
+          "1": 0.5
+        },
+        "window_rates": {
+          "negative": {
+            "estimate": 0.017333333333333333,
+            "files": 1000,
+            "flagged": 104,
+            "high": 0.020833333333333332,
+            "low": 0.014,
+            "windows": 6000
+          },
+          "off_burst": {
+            "estimate": 0.028594122319301033,
+            "files": 576,
+            "flagged": 36,
+            "high": 0.03984526199620907,
+            "low": 0.01863844790964092,
+            "windows": 1259
+          },
+          "off_burst_minus_negative": {
+            "estimate": 0.0112607889859677,
+            "high": 0.02301836806001932,
+            "low": 0.0005691613408125173
+          }
+        }
+      },
+      "vlm_fpr": {
+        "c4_discounted": {
+          "cnn_recall": 0.894878706199461,
+          "cnn_recall_discounted": 0.8937289420485176,
+          "delta_discounted": 0.8074755727762803,
+          "holds": true,
+          "n": 371,
+          "off_burst_rate_used": 0.010819165378670788,
+          "vlm_recall": 0.0862533692722372
+        },
+        "thresholds_by_model_fold": {
+          "0": 0.8513358235359192,
+          "1": 0.6455669403076172
+        },
+        "window_rates": {
+          "negative": {
+            "estimate": 0.0028333333333333335,
+            "files": 1000,
+            "flagged": 17,
+            "high": 0.004166666666666667,
+            "low": 0.0016666666666666668,
+            "windows": 6000
+          },
+          "off_burst": {
+            "estimate": 0.005559968228752979,
+            "files": 576,
+            "flagged": 7,
+            "high": 0.010819165378670788,
+            "low": 0.001579778830963665,
+            "windows": 1259
+          },
+          "off_burst_minus_negative": {
+            "estimate": 0.002726634895419645,
+            "high": 0.007975627764767106,
+            "low": -0.0015818806127839407
+          }
+        }
+      },
+      "vlm_fpr_real": 0.005
+    }
+  },
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  }
+}

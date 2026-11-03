@@ -6,6 +6,7 @@ import os
 import shutil
 import subprocess
 import tempfile
+from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -160,7 +161,14 @@ class DatasetPlotter:
         self.output_dir = self._resolve(config.output_dir)
         self.manifest_path = self._resolve(config.manifest_path)
 
-    def plot_all(self, *, overwrite: bool = False) -> list[dict[str, Any]]:
+    def plot_all(
+        self,
+        *,
+        overwrite: bool = False,
+        workers: int = 1,
+    ) -> list[dict[str, Any]]:
+        if workers < 1:
+            raise ValueError("workers must be >= 1.")
         records = self._load_labels()
         if overwrite:
             self._reset_outputs()
@@ -172,12 +180,29 @@ class DatasetPlotter:
             )
 
         manifest_records: list[dict[str, Any]] = []
-        for image_index, record in enumerate(
-            tqdm(records, desc="Plotting PSRFITS", unit="image")
-        ):
-            manifest_records.append(
-                self._plot_one(record, image_index=image_index, overwrite=overwrite)
-            )
+        if workers == 1:
+            for image_index, record in enumerate(
+                tqdm(records, desc="Plotting PSRFITS", unit="image")
+            ):
+                manifest_records.append(
+                    self._plot_one(record, image_index=image_index, overwrite=overwrite)
+                )
+        else:
+            # Each image depends only on its own FITS file; map keeps the order of
+            # labels.jsonl, which defines the anonymous sample_id.
+            tasks = [
+                (self.config, self.project_root, record, image_index, overwrite)
+                for image_index, record in enumerate(records)
+            ]
+            with ProcessPoolExecutor(max_workers=workers) as pool:
+                manifest_records = list(
+                    tqdm(
+                        pool.map(_plot_one_in_worker, tasks, chunksize=4),
+                        total=len(tasks),
+                        desc="Plotting PSRFITS",
+                        unit="image",
+                    )
+                )
 
         self._write_manifest(manifest_records)
         LOGGER.info("Image manifest written to %s", self.manifest_path)
@@ -480,3 +505,11 @@ class DatasetPlotter:
             return path.resolve().relative_to(self.project_root).as_posix()
         except ValueError:
             return path.resolve().as_posix()
+
+
+def _plot_one_in_worker(
+    task: tuple[PlotConfig, Path, dict[str, Any], int, bool],
+) -> dict[str, Any]:
+    config, project_root, record, image_index, overwrite = task
+    plotter = DatasetPlotter(config=config, project_root=project_root)
+    return plotter._plot_one(record, image_index=image_index, overwrite=overwrite)

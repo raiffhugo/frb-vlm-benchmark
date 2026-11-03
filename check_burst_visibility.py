@@ -136,8 +136,20 @@ def dedispersed_snr(
         return 0.0, 0.0
     profile = total[:limit] / np.sqrt(count[:limit])
 
+    best_sigma, best_time, _, _ = _boxcar_search(profile, limit, bin_seconds)
+    return best_sigma, best_time
+
+
+def _boxcar_search(
+    profile: np.ndarray,
+    limit: int,
+    bin_seconds: float,
+) -> tuple[float, float, int, int]:
+    """Best peak over the boxcars: (sigma, time, width in bins, start)."""
     best_sigma = 0.0
     best_time = 0.0
+    best_width = 0
+    best_start = 0
     for width in BOXCAR_WIDTHS:
         if width > limit // 4:
             break
@@ -160,7 +172,93 @@ def dedispersed_snr(
         if float(z[peak]) > best_sigma:
             best_sigma = float(z[peak])
             best_time = (peak + width / 2.0) * bin_seconds
-    return best_sigma, best_time
+            best_width = width
+            best_start = peak
+    return best_sigma, best_time, best_width, best_start
+
+
+MORPHOLOGY_BLOCKS = 16
+
+
+def burst_morphology(
+    image: np.ndarray,
+    freqs: np.ndarray,
+    bin_seconds: float,
+    dm: float,
+    *,
+    blocks: int = MORPHOLOGY_BLOCKS,
+) -> dict[str, float]:
+    """Width and spectral occupancy of the burst in the decimated array (revision v4, R0 item 8).
+
+    The peak is the same as in `dedispersed_snr` (same truncated dedispersion and same
+    boxcars); the width is that of the winning boxcar. For the occupancy, each live
+    channel gets the S/N of its on-pulse segment (the window of the winning boxcar, with
+    the noise scale of that dedispersed channel), the channels are grouped into `blocks`
+    blocks contiguous in frequency, and the search finds the contiguous run of blocks
+    that maximizes sum(z)/sqrt(n): a matched filter with a rectangular band. The
+    fraction of live channels in that run is the occupancy. Below ~10 sigma it is
+    dominated by noise and should not be used for stratification.
+    """
+    reference = float(freqs.max())
+    delays = DISPERSION_CONSTANT_S_MHZ2 * dm * (freqs.astype(float) ** -2 - reference**-2)
+    shifts = np.clip(np.round(delays / bin_seconds).astype(int), 0, None)
+    n_bins = image.shape[1]
+    live = np.flatnonzero(np.any(image != 0.0, axis=1))
+    empty = {
+        "peak_sigma": 0.0,
+        "width_bins": 0,
+        "width_ms": 0.0,
+        "band_fraction": float("nan"),
+        "band_low_mhz": float("nan"),
+        "band_high_mhz": float("nan"),
+        "band_sigma": float("nan"),
+    }
+    if live.size == 0:
+        return empty
+    # Same profile as dedispersed_snr, bit for bit: float64 sum channel by channel, in
+    # the same order, restricted to the region of full coverage (empty if any live
+    # channel has a delay longer than the window).
+    limit = int(n_bins - shifts[live].max())
+    if limit < 8:
+        return empty
+    total = np.zeros(limit, dtype=np.float64)
+    for row in live:
+        total += image[row, shifts[row] : shifts[row] + limit]
+    profile = total / np.sqrt(float(live.size))
+    sigma, _, width, start = _boxcar_search(profile, limit, bin_seconds)
+    aligned = np.stack([image[row, shifts[row] : shifts[row] + limit] for row in live])
+    if width == 0:
+        return {**empty, "peak_sigma": sigma}
+
+    kernel = np.ones(width) / np.sqrt(width)
+    smoothed = np.stack([np.convolve(row, kernel, mode="valid") for row in aligned])
+    on_pulse = smoothed[:, start]
+    median = np.median(smoothed, axis=1)
+    scale = 1.4826 * np.median(np.abs(smoothed - median[:, None]), axis=1)
+    z = np.where(scale > 0, (on_pulse - median) / np.where(scale > 0, scale, 1.0), 0.0)
+
+    order = np.argsort(freqs[live])
+    groups = [group for group in np.array_split(order, min(blocks, live.size)) if group.size]
+    block_z = np.array([z[group].sum() for group in groups])
+    block_n = np.array([group.size for group in groups])
+    best = (-np.inf, 0, 0)
+    for first in range(len(groups)):
+        for last in range(first, len(groups)):
+            snr = block_z[first : last + 1].sum() / np.sqrt(block_n[first : last + 1].sum())
+            if snr > best[0]:
+                best = (float(snr), first, last)
+    band_sigma, first, last = best
+    members = np.concatenate(groups[first : last + 1])
+    band_freqs = freqs[live][members]
+    return {
+        "peak_sigma": sigma,
+        "width_bins": int(width),
+        "width_ms": float(width * bin_seconds * 1e3),
+        "band_fraction": float(block_n[first : last + 1].sum() / live.size),
+        "band_low_mhz": float(band_freqs.min()),
+        "band_high_mhz": float(band_freqs.max()),
+        "band_sigma": band_sigma,
+    }
 
 
 def main() -> int:

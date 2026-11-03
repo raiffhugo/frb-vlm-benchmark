@@ -1,0 +1,39 @@
+{
+  "candidate_count_identical": 100,
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/swinynet_check.py",
+    "compare",
+    "--workdir",
+    "/var/tmp/frb_svlm_swinynet_check",
+    "--external",
+    "/var/tmp/frb_svlm_swinynet_check/output/manifest.json"
+  ],
+  "created_utc": "2026-10-13T22:12:25+00:00",
+  "experiment": "SwinYNet-check100",
+  "external_output_sha256": "532a6eb1c3db8acb7cbbc09e260c8db9ce58f7c37eeb3e8319bc93e7b2783505",
+  "git": {
+    "commit": "55d910e3e11014af522e8cabbe85a99bbab5fbf1",
+    "tracked_worktree_dirty": true
+  },
+  "label_identical": 100,
+  "max_abs_delta": 0.0,
+  "n": 100,
+  "outside_tolerance": [],
+  "passed": true,
+  "reference_predictions": {
+    "path": "results_external_binary/predictions.jsonl",
+    "sha256": "b9e4b63407ee8d8332a85357bb647b1234e7a88a1005019eceb721c7287b06b7"
+  },
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  },
+  "tolerance": 1e-06,
+  "within_tolerance": 100
+}

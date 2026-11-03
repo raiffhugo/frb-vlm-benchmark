@@ -1,6 +1,6 @@
 {
   "title": "frb-vlm-benchmark: a zero-shot Vision-Language Model benchmark for Fast Radio Burst detection",
-  "description": "Code, data manifests and per-sample results for 'Generalist Vision-Language Models for Fast Radio Burst detection: a zero-shot benchmark against a specialized detector' (arXiv:2607.07382), as submitted to The Astrophysical Journal Supplement Series.",
+  "description": "Code, data manifests and per-sample results for 'Generalist Vision-Language Models for Fast Radio Burst detection: a zero-shot benchmark against a specialized detector' (arXiv:2607.07382). Release v1.2 adds the analyses of the revised version submitted to The Astrophysical Journal Supplement Series: the held-out simulated set, matched operating points, injection-recovery in real FAST-FREX backgrounds, blind tiling, the preprocessing ablation, the reference network and the two blind human raters, prompt sensitivity, the reasoning ablation, and the decimated rendering of the simulated benchmark.",
   "upload_type": "software",
   "license": "MIT",
   "creators": [

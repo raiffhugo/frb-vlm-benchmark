@@ -12,6 +12,10 @@ from benchmark_predictions.importer import (
 )
 from evaluation.cli import add_evaluation_parser, run_evaluation
 from evaluation.evaluator import EvaluationConfig, PredictionEvaluator
+from evaluation.window_aggregator import (
+    WindowAggregationConfig,
+    WindowPredictionAggregator,
+)
 from evaluation.evaluator_continuous import (
     ContinuousEvaluationConfig,
     ContinuousPredictionEvaluator,
@@ -37,7 +41,11 @@ from simulate_dataset.benchmark_subset import (
 from simulate_dataset.config import SimulationConfig, VALID_SIMULATION_TASKS
 from simulate_dataset.simulator import SimulateSearchDatasetGenerator
 from vlm_classifier.cli import add_vlm_classifier_parser, run_vlm_classifier
-from vlm_classifier.classifier import ClassifierConfig, VLMClassifier
+from vlm_classifier.classifier import (
+    ClassifierConfig,
+    VLMClassifier,
+    read_git_provenance,
+)
 from vlm_classifier.models import DryRunVLM, Gemma4VLM
 from vlm_classifier.parser import classes_for_task, normalize_task
 
@@ -99,6 +107,7 @@ def _plot(
     height: int,
     dpi: int,
     include_title: bool,
+    workers: int = 1,
 ) -> None:
     paths = _paths(config, project_root)
     plot_config = PlotConfig(
@@ -115,7 +124,7 @@ def _plot(
         include_title=include_title,
     )
     plotter = DatasetPlotter(config=plot_config, project_root=project_root)
-    records = plotter.plot_all(overwrite=overwrite)
+    records = plotter.plot_all(overwrite=overwrite, workers=workers)
     LOGGER.info("Plotting finished: %d images.", len(records))
 
 
@@ -125,6 +134,7 @@ def _classify(
     project_root: Path,
     model_name: str,
     model_id: str | None,
+    model_revision: str | None,
     device_map: str,
     dtype: str,
     max_new_tokens: int,
@@ -144,8 +154,13 @@ def _classify(
     decision_threshold: float,
     output: Path | None = None,
     manifest: Path | None = None,
+    git_provenance: dict[str, object] | None = None,
+    prompt_file: Path | None = None,
+    resume: bool = False,
 ) -> None:
     paths = _paths(config, project_root)
+    if git_provenance is None:
+        git_provenance = read_git_provenance(project_root)
     task = normalize_task(task)
     if dry_run:
         model = DryRunVLM(seed=seed, labels=classes_for_task(task))
@@ -153,6 +168,7 @@ def _classify(
     else:
         model = Gemma4VLM(
             model_name=model_id or model_name,
+            revision=model_revision,
             device_map=device_map,
             dtype=dtype,
             max_new_tokens=max_new_tokens,
@@ -173,13 +189,15 @@ def _classify(
         retry_delay=retry_delay,
         task=task,
         decision_threshold=decision_threshold,
+        prompt_path=prompt_file,
     )
     classifier = VLMClassifier(
         config=classifier_config,
         model=model,
         project_root=project_root,
+        git_provenance=git_provenance,
     )
-    records = classifier.run(overwrite=overwrite)
+    records = classifier.run(overwrite=overwrite, resume=resume)
     LOGGER.info("Classification finished: %d predictions.", len(records))
 
 
@@ -311,6 +329,7 @@ def run_plot(args: argparse.Namespace) -> None:
         height=args.height,
         dpi=args.dpi,
         include_title=args.include_title,
+        workers=args.workers,
     )
 
 
@@ -360,12 +379,14 @@ def run_select_binary_benchmark(args: argparse.Namespace) -> None:
 
 def run_classify(args: argparse.Namespace) -> None:
     config, project_root = _load_config(args.config)
+    git_provenance = read_git_provenance(project_root)
     configure_logging(project_root, verbose=args.verbose)
     _classify(
         config=config,
         project_root=project_root,
         model_name=args.model,
         model_id=args.model_id,
+        model_revision=args.model_revision,
         device_map=args.device_map,
         dtype=args.dtype,
         max_new_tokens=args.max_new_tokens,
@@ -385,6 +406,9 @@ def run_classify(args: argparse.Namespace) -> None:
         decision_threshold=args.decision_threshold,
         output=args.output,
         manifest=args.manifest,
+        git_provenance=git_provenance,
+        prompt_file=args.prompt_file,
+        resume=args.resume,
     )
 
 
@@ -400,6 +424,22 @@ def run_evaluate(args: argparse.Namespace) -> None:
         output_dir=args.output_dir,
         task=args.task,
     )
+
+
+def run_aggregate_windows(args: argparse.Namespace) -> None:
+    project_root = Path.cwd().resolve()
+    configure_logging(project_root, verbose=args.verbose)
+    aggregator = WindowPredictionAggregator(
+        config=WindowAggregationConfig(
+            predictions_path=args.predictions,
+            output_path=args.output,
+            threshold=args.threshold,
+            allow_partial=args.allow_partial,
+        ),
+        project_root=project_root,
+    )
+    records = aggregator.aggregate(overwrite=args.overwrite)
+    LOGGER.info("Predictions aggregated per file: %d groups.", len(records))
 
 
 def run_evaluate_continuous(args: argparse.Namespace) -> None:
@@ -474,6 +514,7 @@ def run_all(args: argparse.Namespace) -> None:
         output_dir=args.output_dir,
         task=args.task,
     )
+    git_provenance = read_git_provenance(project_root)
     configure_logging(project_root, verbose=args.verbose)
     logging.getLogger("matplotlib").setLevel(logging.WARNING)
 
@@ -490,12 +531,14 @@ def run_all(args: argparse.Namespace) -> None:
         height=args.height,
         dpi=args.dpi,
         include_title=args.include_title,
+        workers=args.workers,
     )
     _classify(
         config=config,
         project_root=project_root,
         model_name=args.model,
         model_id=args.model_id,
+        model_revision=args.model_revision,
         device_map=args.device_map,
         dtype=args.dtype,
         max_new_tokens=args.max_new_tokens,
@@ -513,6 +556,8 @@ def run_all(args: argparse.Namespace) -> None:
         overwrite=args.overwrite,
         task=args.task,
         decision_threshold=args.decision_threshold,
+        git_provenance=git_provenance,
+        prompt_file=args.prompt_file,
     )
     _evaluate(
         config=config,
@@ -592,6 +637,12 @@ def _add_plot_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--width", type=int, default=DEFAULT_IMAGE_WIDTH)
     parser.add_argument("--height", type=int, default=DEFAULT_IMAGE_HEIGHT)
     parser.add_argument("--dpi", type=int, default=DEFAULT_IMAGE_DPI)
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=1,
+        help="Parallel rendering processes; the output does not depend on their number.",
+    )
     title_group = parser.add_mutually_exclusive_group()
     title_group.add_argument(
         "--include-title",
@@ -621,6 +672,11 @@ def _add_classify_args(
         "--model-id",
         default=None,
         help="Hugging Face ID of the Gemma 4 model. Default: google/gemma-4-E4B-it.",
+    )
+    parser.add_argument(
+        "--model-revision",
+        default=None,
+        help="Hugging Face commit/tag applied to the processor and the model.",
     )
     parser.add_argument(
         "--device-map",
@@ -720,6 +776,24 @@ def _add_classify_args(
         default=0.5,
         help="Threshold on frb_probability to derive FRB in binary mode.",
     )
+    parser.add_argument(
+        "--prompt-file",
+        type=Path,
+        default=None,
+        help=(
+            "Text file with an alternative prompt (e.g. prompts_v4/binary_lean.txt), "
+            "used byte for byte, with its hash in the provenance. Default: the task prompt."
+        ),
+    )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help=(
+            "Continue an interrupted run: check that the saved predictions are the start "
+            "of this same run (manifest, prompt, model, configuration and inference code) "
+            "and classify only the rest."
+        ),
+    )
 
 
 def _add_evaluation_args(parser: argparse.ArgumentParser) -> None:
@@ -740,6 +814,35 @@ def _add_evaluation_args(parser: argparse.ArgumentParser) -> None:
         default="multiclass",
         choices=("multiclass", "frb-binary"),
         help="Evaluation task: multiclass or FRB vs NON_FRB.",
+    )
+
+
+def _add_window_aggregation_args(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "--predictions",
+        type=Path,
+        required=True,
+        help="JSONL with one binary prediction per window and file_group_id.",
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        required=True,
+        help="JSONL of the predictions aggregated per file.",
+    )
+    parser.add_argument(
+        "--threshold",
+        type=float,
+        default=0.5,
+        help="frb_probability threshold for the aggregated label.",
+    )
+    parser.add_argument(
+        "--allow-partial",
+        action="store_true",
+        help=(
+            "Allow exploratory aggregation when some of the present windows "
+            "have errors; gaps and duplicates remain invalid."
+        ),
     )
 
 
@@ -959,6 +1062,14 @@ def build_parser() -> argparse.ArgumentParser:
     _add_classify_args(classify, include_output=True)
     _add_common_runtime_args(classify)
     classify.set_defaults(func=run_classify)
+
+    aggregate_windows = subparsers.add_parser(
+        "aggregate-windows",
+        help="Aggregate the predictions of the blind windows per file (maximum score).",
+    )
+    _add_window_aggregation_args(aggregate_windows)
+    _add_common_runtime_args(aggregate_windows)
+    aggregate_windows.set_defaults(func=run_aggregate_windows)
 
     evaluate = subparsers.add_parser("evaluate", help="Evaluate predictions.")
     _add_config_arg(evaluate)

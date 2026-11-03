@@ -1,0 +1,39 @@
+{
+  "binary_manifest": {
+    "path": "dataset_binary/metadata/image_manifest.jsonl",
+    "sha256": "c02046dfa9bd96f14b127f9236431f6b97c001b9ff540ed17a37625a7838edef"
+  },
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e8_decimated.py",
+    "render",
+    "--workers",
+    "40"
+  ],
+  "created_utc": "2026-10-19T16:55:51+00:00",
+  "experiment": "E8-render",
+  "git": {
+    "commit": "e889f2dcf57b6e41846a762d949639504b34c1e7",
+    "tracked_worktree_dirty": false
+  },
+  "manifest": {
+    "path": "dataset_e8_decimated/metadata/image_manifest.jsonl",
+    "sha256": "85803f9fa0fedf27a5b994cf9903665cc4cf11e732467cceaa3e9ba5216dccf7"
+  },
+  "n": 2000,
+  "shapes": [
+    [
+      256,
+      1017
+    ]
+  ],
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  }
+}

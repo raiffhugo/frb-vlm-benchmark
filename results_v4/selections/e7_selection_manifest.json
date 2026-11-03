@@ -1,0 +1,47 @@
+{
+  "command": [
+    "/tmp/claude-1006/-home-raiffhugo-frb-svlm/abacd72e-c35f-4e9f-94e5-909a298d2238/scratchpad/wt/revision_v4/e7_reasoning.py",
+    "select"
+  ],
+  "composition": {
+    "FRB": 200,
+    "NOISE": 100,
+    "RFI/impulsive_broadband": 20,
+    "RFI/persistent_narrowband": 20,
+    "RFI/point_to_point_microwave": 20,
+    "RFI/satellite_like_inband": 20,
+    "RFI/wifi_multiband": 20
+  },
+  "created_utc": "2026-10-19T21:04:09+00:00",
+  "experiment": "E7-selection",
+  "git": {
+    "commit": "89279fd9371a7c19672b1ce86b1e9acfccf4fdb5",
+    "tracked_worktree_dirty": false
+  },
+  "input": {
+    "path": "dataset_e1_binary/metadata/image_manifest.jsonl",
+    "sha256": "c4482b4cd49b56e8d26c3da30971c3497d6dec5abfa50fc2016909e5fbbae4f1"
+  },
+  "output": {
+    "n": 400,
+    "path": "results_v4/selections/e7_heldout400.jsonl",
+    "sha256": "f72c9d9b9d81e5966ff6fc02c4e240b6cd4de69158b0e35aa9a8e148e4654ebc"
+  },
+  "requested": {
+    "n_frb": 200,
+    "n_noise": 100,
+    "per_rfi_subtype": 20
+  },
+  "sampler": "prompt_timing_experiment.choose_subsample",
+  "seed": 20260927,
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  }
+}

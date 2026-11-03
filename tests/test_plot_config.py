@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import json
 import tempfile
 import unittest
 from pathlib import Path
+
+import numpy as np
 
 from plot_dataset.plotter import (
     ANONYMIZED_IMAGE_DIR,
@@ -88,6 +91,78 @@ class PlotConfigTests(unittest.TestCase):
                 record["image_path"], "dataset/images/samples/sample_000000.png"
             )
             self.assertTrue(record["plot"]["anonymized_image_path"])
+
+
+class ParallelPlotTests(unittest.TestCase):
+    def test_parallel_plot_matches_sequential_bytes_and_manifest(self) -> None:
+        try:  # discover -s tests poe tests/ no sys.path; -m tests.x nao
+            from test_prepare_real import _write_synthetic_psrfits
+        except ModuleNotFoundError:
+            from tests.test_prepare_real import _write_synthetic_psrfits
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            rng = np.random.default_rng(7)
+            freqs = np.linspace(1000.0, 1500.0, 16)
+            labels = root / "labels.jsonl"
+            with labels.open("w", encoding="utf-8") as handle:
+                for index, label in enumerate(("frb", "rfi", "noise")):
+                    fits_path = root / "fits" / f"{label}_{index:05d}.fits"
+                    fits_path.parent.mkdir(parents=True, exist_ok=True)
+                    _write_synthetic_psrfits(
+                        fits_path,
+                        float_data_file_order=rng.normal(size=(16, 256)),
+                        freqs_file_order=freqs,
+                        tsamp_s=1e-3,
+                        nsblk=64,
+                    )
+                    record = {
+                        "sample_id": f"{label}_{index:05d}",
+                        "fits_path": f"fits/{label}_{index:05d}.fits",
+                        "label": label.upper(),
+                        "parameters": {"index": index},
+                    }
+                    handle.write(json.dumps(record) + "\n")
+
+            manifests = {}
+            for workers in (1, 2):
+                plotter = DatasetPlotter(
+                    config=PlotConfig(
+                        labels_path=labels,
+                        output_dir=root / f"images_{workers}",
+                        manifest_path=root / f"manifest_{workers}.jsonl",
+                        width=320,
+                        height=240,
+                        dpi=64,
+                    ),
+                    project_root=root,
+                )
+                manifests[workers] = plotter.plot_all(workers=workers)
+
+            self.assertEqual(len(manifests[2]), 3)
+            for sequential, parallel in zip(manifests[1], manifests[2], strict=True):
+                self.assertEqual(sequential["sample_id"], parallel["sample_id"])
+                self.assertEqual(
+                    sequential["source_sample_id"], parallel["source_sample_id"]
+                )
+                self.assertEqual(parallel["plot"]["backend"], "astropy")
+                self.assertEqual(
+                    (root / sequential["image_path"]).read_bytes(),
+                    (root / parallel["image_path"]).read_bytes(),
+                )
+
+    def test_rejects_non_positive_workers(self) -> None:
+        plotter = DatasetPlotter(
+            config=PlotConfig(
+                labels_path=Path("labels.jsonl"),
+                output_dir=Path("images"),
+                manifest_path=Path("manifest.jsonl"),
+            ),
+            project_root=Path("/tmp/project"),
+        )
+
+        with self.assertRaises(ValueError):
+            plotter.plot_all(workers=0)
 
 
 if __name__ == "__main__":

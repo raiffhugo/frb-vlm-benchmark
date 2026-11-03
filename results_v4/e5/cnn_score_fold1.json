@@ -1,0 +1,34 @@
+{
+  "checkpoint": {
+    "path": "/var/tmp/frb_svlm_e5_cnn/resnet18_fold1.pt",
+    "sha256": "0ae9e8940a238d99a9ac98c209deafb56f3278ce2fef5b43c62158de0f621c6e"
+  },
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e5_cnn.py",
+    "score",
+    "--fold",
+    "1"
+  ],
+  "created_utc": "2026-10-20T01:40:18+00:00",
+  "experiment": "E5-CNN-score-fold1",
+  "git": {
+    "commit": "7f0ce34c2b862674159cb81a46237effa91c345b",
+    "tracked_worktree_dirty": false
+  },
+  "n_test": 798,
+  "n_validation_controls": 500,
+  "scores": {
+    "path": "results_v4/e5/cnn_scores_fold1.jsonl",
+    "sha256": "e9eff0c9ff4fe31eeeb9840ea438427f6d2ec3e6a8edab39f8baa4bc6f240aed"
+  },
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  }
+}

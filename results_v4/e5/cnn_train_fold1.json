@@ -1,0 +1,79 @@
+{
+  "best_validation_loss": 0.21068912547826768,
+  "checkpoint": {
+    "path": "/var/tmp/frb_svlm_e5_cnn/resnet18_fold1.pt",
+    "sha256": "0ae9e8940a238d99a9ac98c209deafb56f3278ce2fef5b43c62158de0f621c6e"
+  },
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e5_cnn.py",
+    "train",
+    "--fold",
+    "1"
+  ],
+  "created_utc": "2026-10-20T01:39:54+00:00",
+  "experiment": "E5-CNN-train-fold1",
+  "git": {
+    "commit": "7f13fd0e7fdaaff72914ba2eeea2b3d0cf0f3e35",
+    "tracked_worktree_dirty": false
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.34631726894776027,
+      "validation_accuracy": 0.868,
+      "validation_loss": 0.31806454759836195
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.2665703545411428,
+      "validation_accuracy": 0.889,
+      "validation_loss": 0.24849215149879456
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.23279915968908205,
+      "validation_accuracy": 0.922,
+      "validation_loss": 0.21068912547826768
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.20914006733232074,
+      "validation_accuracy": 0.916,
+      "validation_loss": 0.2249171607196331
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.1864623788429631,
+      "validation_accuracy": 0.908,
+      "validation_loss": 0.22359175890684127
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.17035170993374454,
+      "validation_accuracy": 0.915,
+      "validation_loss": 0.22207671254873276
+    }
+  ],
+  "hyperparameters": {
+    "batch_size": 16,
+    "epochs": 10,
+    "learning_rate": 0.0001,
+    "optimizer": "Adam",
+    "patience": 3,
+    "precision": "float16 autocast"
+  },
+  "n_train": 9000,
+  "n_validation": 1000,
+  "seed": 914670221,
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  },
+  "weights": "ResNet18_Weights.IMAGENET1K_V1"
+}

@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import logging
 import shutil
+from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -20,6 +22,7 @@ from plot_dataset.plotter import (
 )
 from prepare_real.preprocess import (
     TOA_REFERENCES,
+    WindowPlan,
     averaged_frequency_axis,
     block_average,
     burst_center_s,
@@ -44,6 +47,8 @@ class RealPrepConfig:
     input_manifest: Path
     output_dir: Path
     window_seconds: float = 2.0
+    sliding_windows: bool = False
+    window_stride_seconds: float = 1.0
     time_bins: int = 1024
     freq_bins: int = 512
     zap_sigma: float = 5.0
@@ -66,6 +71,15 @@ class RealPrepConfig:
             raise ValueError(f"invalid reader: {self.reader!r}")
         if self.window_seconds <= 0:
             raise ValueError("window_seconds must be positive.")
+        if (
+            not np.isfinite(self.window_stride_seconds)
+            or self.window_stride_seconds <= 0
+        ):
+            raise ValueError("window_stride_seconds must be positive and finite.")
+        if self.sliding_windows and self.window_stride_seconds > self.window_seconds:
+            raise ValueError(
+                "window_stride_seconds must be <= window_seconds to cover the file."
+            )
         if self.time_bins <= 0 or self.freq_bins <= 0:
             raise ValueError("time_bins and freq_bins must be positive.")
         if self.zap_sigma < 0:
@@ -100,7 +114,9 @@ class RealDatasetPreparer:
         else:
             self._reader = astropy_reader
 
-    def prepare(self, *, overwrite: bool = False) -> list[dict[str, Any]]:
+    def prepare(self, *, overwrite: bool = False, workers: int = 1) -> list[dict[str, Any]]:
+        if workers < 1:
+            raise ValueError("workers must be >= 1.")
         entries = self._load_input_manifest()
         if overwrite:
             self._reset_outputs()
@@ -111,11 +127,78 @@ class RealDatasetPreparer:
         (self.images_dir / ANONYMIZED_IMAGE_DIR).mkdir(parents=True, exist_ok=True)
         self.manifest_path.parent.mkdir(parents=True, exist_ok=True)
 
-        records: list[dict[str, Any]] = []
-        for index, entry in enumerate(
-            tqdm(entries, desc="Preparing real spectra", unit="image")
-        ):
-            records.append(self._prepare_one(entry, image_index=index, overwrite=overwrite))
+        # Each image depends only on its own file and its own window (the draw for the
+        # negatives uses [seed, index]); the tasks come out in order and map keeps it.
+        tasks: list[tuple[dict[str, Any], dict[str, Any]]] = []
+        if self.config.sliding_windows:
+            # Blind windows: the position depends only on the file duration, never on
+            # the label, toa or dm. Ordering by file_group_id does not reveal the class.
+            work_items = []
+            for entry in entries:
+                fits_path = self._resolve(Path(entry["fits_path"]))
+                file_group_id = self._file_group_id(entry, fits_path)
+                work_items.append((file_group_id, entry, fits_path))
+            work_items.sort(key=lambda item: (item[0], item[2].as_posix()))
+
+            for file_group_id, entry, fits_path in tqdm(
+                work_items,
+                desc="Preparing real files",
+                unit="file",
+            ):
+                if not fits_path.exists():
+                    raise FileNotFoundError(
+                        f"PSRFITS file not found: {fits_path}"
+                    )
+                layout = self._reader.read_layout(fits_path)
+                plans = self._sliding_window_plans(layout)
+                id_token = file_group_id.removeprefix("real_file_")
+                for window_index, plan in enumerate(plans):
+                    image_id = (
+                        f"{ANONYMIZED_IMAGE_PREFIX}_{id_token}"
+                        f"_w{window_index:04d}_s{plan.start_sample:09d}"
+                    )
+                    tasks.append(
+                        (
+                            entry,
+                            {
+                                "image_index": 0,
+                                "overwrite": overwrite,
+                                "image_id": image_id,
+                                "layout": layout,
+                                "plan": plan,
+                                "window_mode": "sliding",
+                                "file_group_id": file_group_id,
+                                "window_index": window_index,
+                                "window_count": len(plans),
+                            },
+                        )
+                    )
+        else:
+            tasks = [
+                (entry, {"image_index": index, "overwrite": overwrite})
+                for index, entry in enumerate(entries)
+            ]
+
+        if workers == 1:
+            records = [
+                self._prepare_one(entry, **kwargs)
+                for entry, kwargs in tqdm(
+                    tasks, desc="Preparing real spectra", unit="image"
+                )
+            ]
+        else:
+            payloads = [
+                (self.config, self.project_root, entry, kwargs) for entry, kwargs in tasks
+            ]
+            with ProcessPoolExecutor(max_workers=workers) as pool:
+                records = list(
+                    tqdm(
+                        pool.map(_prepare_one_in_worker, payloads, chunksize=2),
+                        total=len(payloads),
+                        desc="Preparing real spectra",
+                        unit="image",
+                    )
+                )
 
         with self.manifest_path.open("w", encoding="utf-8") as handle:
             for record in records:
@@ -170,7 +253,11 @@ class RealDatasetPreparer:
 
         toa = _optional_float(row.get("toa"), field="toa", position=position)
         dm = _optional_float(row.get("dm"), field="dm", position=position)
-        if label == "FRB" and (toa is None or dm is None):
+        if (
+            not self.config.sliding_windows
+            and label == "FRB"
+            and (toa is None or dm is None)
+        ):
             raise ValueError(
                 f"Sample {position} is an FRB but does not provide toa and dm; both "
                 "are required to centre the window on the burst."
@@ -200,25 +287,39 @@ class RealDatasetPreparer:
         *,
         image_index: int,
         overwrite: bool,
+        image_id: str | None = None,
+        layout: Any | None = None,
+        plan: WindowPlan | None = None,
+        window_mode: str | None = None,
+        file_group_id: str | None = None,
+        window_index: int = 0,
+        window_count: int = 1,
     ) -> dict[str, Any]:
         fits_path = self._resolve(Path(entry["fits_path"]))
         if not fits_path.exists():
             raise FileNotFoundError(f"PSRFITS file not found: {fits_path}")
 
-        image_id = f"{ANONYMIZED_IMAGE_PREFIX}_{image_index:06d}"
+        if image_id is None:
+            image_id = f"{ANONYMIZED_IMAGE_PREFIX}_{image_index:06d}"
         image_path = self.images_dir / ANONYMIZED_IMAGE_DIR / f"{image_id}.png"
         if image_path.exists() and not overwrite:
             raise FileExistsError(f"Image already exists: {image_path}. Use --overwrite.")
 
-        layout = self._reader.read_layout(fits_path)
-        center_s, window_mode = self._window_center(entry, layout, image_index)
-        plan = plan_window(
-            center_s=center_s,
-            window_seconds=self.config.window_seconds,
-            tsamp_s=layout.tsamp_s,
-            nsamp_total=layout.nsamp_total,
-            time_bins=self.config.time_bins,
-        )
+        if layout is None:
+            layout = self._reader.read_layout(fits_path)
+        if plan is None:
+            center_s, window_mode = self._window_center(entry, layout, image_index)
+            plan = plan_window(
+                center_s=center_s,
+                window_seconds=self.config.window_seconds,
+                tsamp_s=layout.tsamp_s,
+                nsamp_total=layout.nsamp_total,
+                time_bins=self.config.time_bins,
+            )
+        if window_mode is None:
+            raise ValueError("window_mode must be given when plan is provided.")
+        if file_group_id is None:
+            file_group_id = self._file_group_id(entry, fits_path)
         block = self._reader.read_block(
             fits_path,
             start_sample=plan.start_sample,
@@ -282,7 +383,21 @@ class RealDatasetPreparer:
             "window_seconds_actual": plan.n_samples * layout.tsamp_s,
             "window_start_seconds": plan.start_sample * layout.tsamp_s,
             "window_mode": window_mode,
-            "toa_reference": self.config.toa_reference if entry["label"] == "FRB" else None,
+            "sliding_windows": self.config.sliding_windows,
+            "window_stride_seconds_requested": (
+                self.config.window_stride_seconds
+                if self.config.sliding_windows
+                else None
+            ),
+            "window_index": window_index,
+            "window_count": window_count,
+            "window_start_sample": plan.start_sample,
+            "window_stop_sample": plan.stop_sample,
+            "toa_reference": (
+                self.config.toa_reference
+                if entry["label"] == "FRB" and not self.config.sliding_windows
+                else None
+            ),
             "time_bins": self.config.time_bins,
             "freq_bins": self.config.freq_bins,
             "time_factor": plan.time_factor,
@@ -298,6 +413,11 @@ class RealDatasetPreparer:
         return {
             "sample_id": image_id,
             "source_sample_id": entry["source_id"],
+            "file_group_id": file_group_id,
+            "window_index": window_index,
+            "window_count": window_count,
+            "window_start_seconds": plan.start_sample * layout.tsamp_s,
+            "window_stop_seconds": plan.stop_sample * layout.tsamp_s,
             "image_path": self._relative_path(image_path),
             "fits_path": self._relative_path(fits_path),
             "true_label": entry["label"],
@@ -347,6 +467,44 @@ class RealDatasetPreparer:
             return duration / 2.0, "center"
         return float(rng.uniform(low, high)), mode
 
+    def _sliding_window_plans(self, layout: Any) -> list[WindowPlan]:
+        """Windows of window_seconds with stride window_stride_seconds, plus a final one
+        aligned with the end of the file (6 windows for the 6.04 s of FAST-FREX)."""
+        template = plan_window(
+            center_s=layout.duration_s / 2.0,
+            window_seconds=self.config.window_seconds,
+            tsamp_s=layout.tsamp_s,
+            nsamp_total=layout.nsamp_total,
+            time_bins=self.config.time_bins,
+        )
+        stride_samples = max(
+            1, int(round(self.config.window_stride_seconds / layout.tsamp_s))
+        )
+        last_start = layout.nsamp_total - template.n_samples
+        if last_start > 0 and stride_samples > template.n_samples:
+            raise ValueError(
+                "window_stride_seconds leaves gaps between the windows of this "
+                "file."
+            )
+
+        starts = list(range(0, last_start + 1, stride_samples))
+        if not starts or starts[-1] != last_start:
+            starts.append(last_start)
+        return [
+            WindowPlan(
+                start_sample=start,
+                stop_sample=start + template.n_samples,
+                time_factor=template.time_factor,
+            )
+            for start in starts
+        ]
+
+    def _file_group_id(self, entry: dict[str, Any], fits_path: Path) -> str:
+        path_key = self._relative_path(fits_path)
+        identity = f"{entry['source_id']}\0{path_key}".encode("utf-8")
+        digest = hashlib.sha256(identity).hexdigest()[:16]
+        return f"real_file_{digest}"
+
     def _reset_outputs(self) -> None:
         for target in (self.images_dir, self.manifest_path):
             if target.is_dir():
@@ -367,6 +525,14 @@ class RealDatasetPreparer:
             return path.resolve().relative_to(self.project_root).as_posix()
         except ValueError:
             return path.resolve().as_posix()
+
+
+def _prepare_one_in_worker(
+    payload: tuple[RealPrepConfig, Path, dict[str, Any], dict[str, Any]],
+) -> dict[str, Any]:
+    config, project_root, entry, kwargs = payload
+    preparer = RealDatasetPreparer(config=config, project_root=project_root)
+    return preparer._prepare_one(entry, **kwargs)
 
 
 def _optional_float(value: Any, *, field: str, position: int) -> float | None:

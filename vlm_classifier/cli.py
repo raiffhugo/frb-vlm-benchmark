@@ -5,7 +5,11 @@ import logging
 from pathlib import Path
 
 from simulate_dataset.cli import configure_logging
-from vlm_classifier.classifier import ClassifierConfig, VLMClassifier
+from vlm_classifier.classifier import (
+    ClassifierConfig,
+    VLMClassifier,
+    read_git_provenance,
+)
 from vlm_classifier.models import DryRunVLM, Gemma4VLM
 from vlm_classifier.parser import classes_for_task, normalize_task
 
@@ -39,6 +43,11 @@ def add_vlm_classifier_parser(parser: argparse.ArgumentParser) -> None:
         "--model-id",
         default=None,
         help="Hugging Face ID of the Gemma 4 model. Default: google/gemma-4-E4B-it.",
+    )
+    parser.add_argument(
+        "--model-revision",
+        default=None,
+        help="Hugging Face commit/tag applied to the processor and the model.",
     )
     parser.add_argument(
         "--device-map",
@@ -138,6 +147,7 @@ def add_vlm_classifier_parser(parser: argparse.ArgumentParser) -> None:
 
 def run_vlm_classifier(args: argparse.Namespace) -> None:
     project_root = Path.cwd().resolve()
+    git_provenance = read_git_provenance(project_root)
     log_file = configure_logging(project_root, verbose=args.verbose)
     task = normalize_task(args.task)
 
@@ -147,6 +157,7 @@ def run_vlm_classifier(args: argparse.Namespace) -> None:
     else:
         model = Gemma4VLM(
             model_name=args.model_id or args.model,
+            revision=args.model_revision,
             device_map=args.device_map,
             dtype=args.dtype,
             max_new_tokens=args.max_new_tokens,
@@ -172,6 +183,7 @@ def run_vlm_classifier(args: argparse.Namespace) -> None:
         config=config,
         model=model,
         project_root=project_root,
+        git_provenance=git_provenance,
     )
     predictions = classifier.run(overwrite=args.overwrite)
     logging.getLogger(__name__).info(

@@ -1,0 +1,79 @@
+{
+  "best_validation_loss": 0.21493342196941376,
+  "checkpoint": {
+    "path": "/var/tmp/frb_svlm_e5_cnn/resnet18_fold0.pt",
+    "sha256": "6156a040630310562b192106d6a210235eec445307048f116f4ad26d8bc0b252"
+  },
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e5_cnn.py",
+    "train",
+    "--fold",
+    "0"
+  ],
+  "created_utc": "2026-10-20T01:30:36+00:00",
+  "experiment": "E5-CNN-train-fold0",
+  "git": {
+    "commit": "4a3f67a246dce5fb28716efd83876436efcbe11a",
+    "tracked_worktree_dirty": false
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.34916882344086964,
+      "validation_accuracy": 0.878,
+      "validation_loss": 0.323274290561676
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.25977040317985745,
+      "validation_accuracy": 0.885,
+      "validation_loss": 0.26825790500640867
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.21784577040870984,
+      "validation_accuracy": 0.921,
+      "validation_loss": 0.21493342196941376
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.1973916205631362,
+      "validation_accuracy": 0.907,
+      "validation_loss": 0.24397081369161605
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.1756733232372337,
+      "validation_accuracy": 0.809,
+      "validation_loss": 0.4448937191963196
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.1580172871450583,
+      "validation_accuracy": 0.921,
+      "validation_loss": 0.21582999581098555
+    }
+  ],
+  "hyperparameters": {
+    "batch_size": 16,
+    "epochs": 10,
+    "learning_rate": 0.0001,
+    "optimizer": "Adam",
+    "patience": 3,
+    "precision": "float16 autocast"
+  },
+  "n_train": 9000,
+  "n_validation": 1000,
+  "seed": 1421701348,
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  },
+  "weights": "ResNet18_Weights.IMAGENET1K_V1"
+}

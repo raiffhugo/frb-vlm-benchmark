@@ -1,0 +1,114 @@
+{
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/labeling_tool.py",
+    "build"
+  ],
+  "created_utc": "2026-10-19T15:35:13+00:00",
+  "experiment": "E5-E4-labeling-tool",
+  "git": {
+    "commit": "e0e296ffba27c721bfa4faf0ba7e8e0c8566c9d4",
+    "tracked_worktree_dirty": false
+  },
+  "key": {
+    "path": "results_v4/e5/labeling_key.jsonl",
+    "sha256": "b742b26ddea57f3f0d8af3f8c0c18dfd0df7aee470364da2ae0676425e6eee9b"
+  },
+  "orders": {
+    "A": {
+      "A": [
+        "img_02d2e620",
+        "img_a1b70882",
+        "img_548e1810",
+        "img_3ec8baca",
+        "img_afddf52c"
+      ],
+      "B": [
+        "img_905c9c2d",
+        "img_690a0adf",
+        "img_826c6eb8",
+        "img_39f45ac5",
+        "img_91a3361d"
+      ]
+    },
+    "B": {
+      "A": [
+        "img_e8f28da9",
+        "img_ecbf0879",
+        "img_e02c036c",
+        "img_674e0ead",
+        "img_7a270172"
+      ],
+      "B": [
+        "img_ce2b4d09",
+        "img_dd5516e3",
+        "img_99fd5751",
+        "img_32840e8a",
+        "img_e4d87b81"
+      ]
+    }
+  },
+  "part_a": {
+    "path": "results_v4/selections/e5_humans.jsonl",
+    "sha256": "e24bec1a500d1459f4d1617683f1924cff1c7b9938c3104dfebc35b682f404fc"
+  },
+  "part_b": {
+    "path": "results_v4/selections/e4_audit.jsonl",
+    "sha256": "3c69f5b54c61a2e4438bda1d9579c673755497e480187e1c74f60982d9aa2a23"
+  },
+  "raters": [
+    "A",
+    "B"
+  ],
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  },
+  "training": [
+    {
+      "answer": "NON_FRB",
+      "sample_id": "sample_001520"
+    },
+    {
+      "answer": "NON_FRB",
+      "sample_id": "sample_001410"
+    },
+    {
+      "answer": "FRB",
+      "sample_id": "sample_000697"
+    },
+    {
+      "answer": "FRB",
+      "sample_id": "sample_000317"
+    },
+    {
+      "answer": "FRB",
+      "sample_id": "sample_000410"
+    },
+    {
+      "answer": "FRB",
+      "sample_id": "sample_000309"
+    },
+    {
+      "answer": "NON_FRB",
+      "sample_id": "sample_001154"
+    },
+    {
+      "answer": "NON_FRB",
+      "sample_id": "sample_002987"
+    },
+    {
+      "answer": "NON_FRB",
+      "sample_id": "sample_002413"
+    },
+    {
+      "answer": "FRB",
+      "sample_id": "sample_000036"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e0_rebuild.py",
+    "compare"
+  ],
+  "created_utc": "2026-10-13T22:05:05+00:00",
+  "experiment": "E0-check50",
+  "git": {
+    "commit": "8b1fe3da95d84e4ac15fbefa5a15d43c64fa4bfd",
+    "tracked_worktree_dirty": true
+  },
+  "label_identical": 50,
+  "mismatches": [],
+  "n": 50,
+  "passed": true,
+  "raw_identical": 50,
+  "reference_predictions": {
+    "path": "results_vlm2b_0t_binary/predictions.jsonl",
+    "sha256": "4f52b3a76203283a1b3bdbbeb9d6cbdcf5e147b28d8e95ff2992ad3321ef4438"
+  },
+  "rerun_predictions": {
+    "path": "results_v4/e0/check50_predictions.jsonl",
+    "sha256": "6280e9bd466d62f1003169df9a7dbe3a733cafdb78e0f18bf15eb641ff8910f4"
+  },
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  }
+}

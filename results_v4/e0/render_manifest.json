@@ -1,0 +1,56 @@
+{
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e0_rebuild.py",
+    "render",
+    "--workers",
+    "32"
+  ],
+  "created_utc": "2026-10-13T22:00:26+00:00",
+  "experiment": "E0-render",
+  "git": {
+    "commit": "b9d71d0938462f9655807422ea7c1b0e7ea0e65d",
+    "tracked_worktree_dirty": false
+  },
+  "labels": {
+    "path": "dataset/metadata/labels.jsonl",
+    "sha256": "96c13f9c0ae95762f14f06da59dd72d97738ac23be781336026ad8ef754fb6db"
+  },
+  "manifest_check": {
+    "first_mismatches": [],
+    "identical": true,
+    "mismatched_records": 0,
+    "rebuilt_records": 3000,
+    "reference_records": 3000
+  },
+  "png_hashes_sha256": "b1d4ba414bd8caa814422f6582c6755e9cf20d2e5deda26e50da7361096c4508",
+  "rebuilt_manifest_sha256": "45798dda2ce3c0764e1227aed9e5913cec7467df35a12bf60683d7400e4a715a",
+  "reference_manifest": {
+    "path": "dataset/metadata/image_manifest.jsonl",
+    "sha256": "45798dda2ce3c0764e1227aed9e5913cec7467df35a12bf60683d7400e4a715a"
+  },
+  "render": {
+    "anonymized_image_path": true,
+    "backend": "astropy",
+    "cmap": "viridis",
+    "dpi": 192,
+    "height": 768,
+    "normalization": "percentile",
+    "percentiles": [
+      1.0,
+      99.0
+    ],
+    "title": false,
+    "width": 1024
+  },
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  },
+  "workers": 32
+}

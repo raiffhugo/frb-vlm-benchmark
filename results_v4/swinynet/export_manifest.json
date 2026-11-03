@@ -1,0 +1,31 @@
+{
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/swinynet_check.py",
+    "export",
+    "--workdir",
+    "/var/tmp/frb_svlm_swinynet_check"
+  ],
+  "created_utc": "2026-10-13T22:05:00+00:00",
+  "experiment": "SwinYNet-check100-export",
+  "exported": 100,
+  "git": {
+    "commit": "8b1fe3da95d84e4ac15fbefa5a15d43c64fa4bfd",
+    "tracked_worktree_dirty": true
+  },
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  },
+  "subset": {
+    "n": 100,
+    "seed": 42,
+    "sha256": "03d39f3d3473db195c14cacb2ebf85a738f3f15a679ce7703ee8fb5629f3ff0c"
+  },
+  "workdir": "/var/tmp/frb_svlm_swinynet_check"
+}

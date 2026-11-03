@@ -1,0 +1,34 @@
+{
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e2_injection.py",
+    "check-control",
+    "--workers",
+    "40",
+    "--workdir",
+    "/var/tmp/frb_svlm_e2_check"
+  ],
+  "created_utc": "2026-10-19T15:45:48+00:00",
+  "experiment": "E2-control-check",
+  "git": {
+    "commit": "c84ce2b7a228f8ab7245ca491e90258fb45c761a",
+    "tracked_worktree_dirty": false
+  },
+  "identical_png": 1000,
+  "mismatches": [],
+  "n": 1000,
+  "paper_manifest": {
+    "path": "dataset_real_full/metadata/image_manifest.jsonl",
+    "sha256": "83aaf804659c608661ff5638ba0106ca9585c4230be9656ec1b0f5d5c2447b81"
+  },
+  "passed": true,
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  }
+}

@@ -38,6 +38,29 @@ def add_prepare_real_parser(parser: argparse.ArgumentParser) -> None:
         help="Duration of the extracted window, in seconds.",
     )
     parser.add_argument(
+        "--workers",
+        type=int,
+        default=1,
+        help="Parallel processes; the output does not depend on their number.",
+    )
+    parser.add_argument(
+        "--sliding-windows",
+        action="store_true",
+        help=(
+            "Scan each file with blind sliding windows, without using the "
+            "label, toa or dm to place them."
+        ),
+    )
+    parser.add_argument(
+        "--window-stride-seconds",
+        type=float,
+        default=1.0,
+        help=(
+            "Stride between blind windows, in seconds; must be less than or "
+            "equal to --window-seconds."
+        ),
+    )
+    parser.add_argument(
         "--time-bins",
         type=int,
         default=1024,
@@ -148,6 +171,8 @@ def run_prepare_real(args: argparse.Namespace) -> None:
         input_manifest=args.input_manifest,
         output_dir=args.output_dir,
         window_seconds=args.window_seconds,
+        sliding_windows=args.sliding_windows,
+        window_stride_seconds=args.window_stride_seconds,
         time_bins=args.time_bins,
         freq_bins=args.freq_bins,
         zap_sigma=args.zap_sigma,
@@ -166,7 +191,7 @@ def run_prepare_real(args: argparse.Namespace) -> None:
         include_title=args.include_title,
     )
     preparer = RealDatasetPreparer(config=config, project_root=project_root)
-    records = preparer.prepare(overwrite=args.overwrite)
+    records = preparer.prepare(overwrite=args.overwrite, workers=args.workers)
     logging.getLogger(__name__).info(
         "Preparation finished: %d images, manifest in %s, logs in %s",
         len(records),

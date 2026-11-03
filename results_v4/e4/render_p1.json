@@ -1,0 +1,36 @@
+{
+  "channels_removed_median": 1218.0,
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e4_preprocessing.py",
+    "render",
+    "--workers",
+    "40"
+  ],
+  "created_utc": "2026-10-19T16:05:17+00:00",
+  "experiment": "E4-render-P1",
+  "git": {
+    "commit": "9c4c48f65479f9462cc180232f951a1381771cf2",
+    "tracked_worktree_dirty": false
+  },
+  "identical_to_paper_png": 0,
+  "manifest": {
+    "path": "dataset_real_e4_p1/metadata/image_manifest.jsonl",
+    "sha256": "6e53d7272fb9a1cdcaa652dbd4a16461aec6dc62cddd1baf8ab22cc1ea30e15c"
+  },
+  "n": 1600,
+  "paper_manifest": {
+    "path": "dataset_real_full/metadata/image_manifest.jsonl",
+    "sha256": "83aaf804659c608661ff5638ba0106ca9585c4230be9656ec1b0f5d5c2447b81"
+  },
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  },
+  "variant": "P1"
+}

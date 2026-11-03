@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import unittest
+from types import SimpleNamespace
 
 from vlm_classifier.models import (
     DEFAULT_GEMMA4_MODEL_ID,
+    Gemma4VLM,
     build_generation_kwargs,
     resolve_gemma4_model_id,
 )
@@ -35,6 +37,35 @@ class Gemma4ModelTests(unittest.TestCase):
         self.assertNotIn("temperature", kwargs)
         self.assertNotIn("top_p", kwargs)
         self.assertNotIn("top_k", kwargs)
+
+    def test_provenance_records_revision_processor_and_software(self) -> None:
+        vlm = object.__new__(Gemma4VLM)
+        vlm.model_id = "google/gemma-test"
+        vlm.revision = "revision-123"
+        vlm.model = SimpleNamespace(
+            config=SimpleNamespace(_commit_hash="revision-123")
+        )
+        vlm.processor = SimpleNamespace()
+        vlm.device_map = "auto"
+        vlm.dtype = "auto"
+        vlm.max_new_tokens = 64
+        vlm.attn_implementation = "sdpa"
+        vlm.cache_implementation = "static"
+        vlm.do_sample = False
+        vlm.temperature = None
+        vlm.top_p = None
+        vlm.top_k = None
+        vlm.seed = None
+
+        provenance = vlm.provenance()
+
+        self.assertEqual(provenance["requested_revision"], "revision-123")
+        self.assertEqual(provenance["model_revision"], "revision-123")
+        self.assertIn("SimpleNamespace", provenance["processor_class"])
+        self.assertEqual(
+            set(provenance["software_versions"]),
+            {"torch", "transformers", "pillow"},
+        )
 
     def test_sampling_generation_includes_sampling_parameters(self) -> None:
         kwargs = build_generation_kwargs(

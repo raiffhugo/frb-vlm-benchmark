@@ -1,0 +1,94 @@
+{
+  "bootstrap": {
+    "seed": 42
+  },
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/r0_reanalysis.py"
+  ],
+  "created_utc": "2026-10-13T22:10:37+00:00",
+  "experiment": "R0",
+  "fold_seed": 42,
+  "git": {
+    "commit": "55d910e3e11014af522e8cabbe85a99bbab5fbf1",
+    "tracked_worktree_dirty": true
+  },
+  "inputs": {
+    "binary_manifest": {
+      "path": "dataset_binary/metadata/image_manifest.jsonl",
+      "sha256": "c02046dfa9bd96f14b127f9236431f6b97c001b9ff540ed17a37625a7838edef"
+    },
+    "e2b_binary": {
+      "path": "results_vlm2b_0t_binary/predictions.jsonl",
+      "sha256": "4f52b3a76203283a1b3bdbbeb9d6cbdcf5e147b28d8e95ff2992ad3321ef4438"
+    },
+    "e2b_multiclass": {
+      "path": "results_vlm2b_0t_new/predictions.jsonl",
+      "sha256": "33a07c0a56ac857e5752aa01b5038b39003952b5ef2309254d176fac72f1eb8d"
+    },
+    "e2b_real": {
+      "path": "results_real_binary_full_2b/predictions.jsonl",
+      "sha256": "cae7f0c85a3c963d17c00983df74389937707b5363fc1987b1453be0e5872a08"
+    },
+    "e4b_binary": {
+      "path": "results_vlm_0t_binary/predictions.jsonl",
+      "sha256": "f623ce901e2a43e41c3dd04601a5326df9da045ff5336e9ce7a62bf4d90241d7"
+    },
+    "e4b_multiclass": {
+      "path": "results_vlm_0t_new/predictions.jsonl",
+      "sha256": "4b33b15e015482b95a9e9987c05031d36c8228ae90c1278653735a6ca7fe662c"
+    },
+    "e4b_real": {
+      "path": "results_real_binary_full_4b/predictions.jsonl",
+      "sha256": "0728da73b519dd0690d1011bf319f3cb9a285e6731b10ecfb93678847dfc2d03"
+    },
+    "multiclass_dev": {
+      "path": "results_multiclass_subset/subset_manifest.jsonl",
+      "sha256": "e3284476ab509d20cb6c4be42c02345e7b5ba281c459235be0e0aaebbddf0eab"
+    },
+    "real_manifest": {
+      "path": "dataset_real_full/metadata/image_manifest.jsonl",
+      "sha256": "83aaf804659c608661ff5638ba0106ca9585c4230be9656ec1b0f5d5c2447b81"
+    },
+    "real_visibility": {
+      "path": "fast_frex/burst_visibility_full.csv",
+      "sha256": "e57d66944e33f24ec443e8539026db46627d96ac00b66451c9aed7cde499afdc"
+    },
+    "sim_visibility": {
+      "path": "dataset/metadata/burst_visibility_sim.csv",
+      "sha256": "582b4884a0f7cee6056632fc68037ab13f26427c316e0f8d3519418b83a9265c"
+    },
+    "swinynet_binary": {
+      "path": "results_external_binary/predictions.jsonl",
+      "sha256": "b9e4b63407ee8d8332a85357bb647b1234e7a88a1005019eceb721c7287b06b7"
+    },
+    "timing_e2b": {
+      "path": "results_prompt_timing_2b/predictions.jsonl",
+      "sha256": "160424fb29ecbd38b721395f03a17602010f74a36133ddf09b1b9f3315714b05"
+    },
+    "timing_e4b": {
+      "path": "results_prompt_timing_4b/predictions.jsonl",
+      "sha256": "6011be9f4daaf8e6f32e369f351b90778b68dccd70c65365dcba831a96484d95"
+    }
+  },
+  "sigma_bins": [
+    0.0,
+    5.0,
+    8.0,
+    15.0,
+    30.0,
+    60.0,
+    100.0,
+    300.0,
+    "inf"
+  ],
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  }
+}

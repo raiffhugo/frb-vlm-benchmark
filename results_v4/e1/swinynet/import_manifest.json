@@ -1,0 +1,37 @@
+{
+  "aggregation": "max",
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e1_analysis.py",
+    "import-swinynet",
+    "--workdir",
+    "/var/tmp/frb_svlm_e1_swinynet",
+    "--external",
+    "/var/tmp/frb_svlm_e1_swinynet/output/manifest.json"
+  ],
+  "created_utc": "2026-10-19T18:05:51+00:00",
+  "experiment": "E1-SwinYNet-import",
+  "export_manifest": {
+    "path": "/var/tmp/frb_svlm_e1_swinynet/metadata/benchmark_manifest.jsonl",
+    "sha256": "c7ae9687d16bc878b764522c9afd3d62114476449e5a0552e7fde236f69fa02a"
+  },
+  "external_output": {
+    "path": "/var/tmp/frb_svlm_e1_swinynet/output/manifest.json",
+    "sha256": "7fd0d2fd18b3b460927560135172ceaca679317af08e9e4ef4bbebb43bbdb58c"
+  },
+  "git": {
+    "commit": "899bec548e4705fd9a42e8e0f0222019f2a9681d",
+    "tracked_worktree_dirty": false
+  },
+  "n": 2000,
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  },
+  "threshold": 0.5
+}

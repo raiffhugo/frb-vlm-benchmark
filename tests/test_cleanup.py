@@ -118,8 +118,10 @@ class CleanupTests(unittest.TestCase):
             classifier.run(overwrite=True)
 
             text = output.read_text(encoding="utf-8")
-            self.assertNotIn("old", text)
+            # "old" aparece em "decision_threshold"; compara o conteudo, nao a substring.
+            self.assertNotEqual(text, "old\n")
             self.assertEqual(len(text.splitlines()), 1)
+            self.assertEqual(json.loads(text)["sample_id"], "sample_000000")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,89 @@
+{
+  "band_fwhm_range_mhz": [
+    100.0,
+    400.0
+  ],
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e2_injection.py",
+    "plan",
+    "--workers",
+    "32"
+  ],
+  "created_utc": "2026-10-19T16:15:18+00:00",
+  "dm_range": [
+    350.0,
+    650.0
+  ],
+  "edge_margin_s": 0.1,
+  "experiment": "E2-plan",
+  "git": {
+    "commit": "c0b6f5a97e467c931d2a7d7c87aee8f9de349823",
+    "tracked_worktree_dirty": false
+  },
+  "grid": {
+    "band": [
+      "broadband",
+      "limited"
+    ],
+    "replicas": 8,
+    "scattering": [
+      "none",
+      "tau5ms"
+    ],
+    "target_sigma": [
+      3,
+      5,
+      8,
+      12,
+      15,
+      20,
+      30,
+      50
+    ],
+    "width_ms": [
+      1,
+      3,
+      10,
+      30
+    ]
+  },
+  "max_abs_decoded": 1000000.0,
+  "n_files": 1000,
+  "n_injections": 1024,
+  "plan": {
+    "path": "results_v4/e2/injection_plan.jsonl",
+    "sha256": "8203ca835a2fba1204081100e5d86c8584d3c062ddb2ea44031ab2f19e1a3c09"
+  },
+  "real_manifest": {
+    "path": "fast_frex/real_manifest_full.csv",
+    "sha256": "788ab55d1ab27a800322db23ec26de683100988828970a61f2d957b86e91fadf"
+  },
+  "redrawn": {
+    "inj_0443": {
+      "attempts": 5,
+      "original_start_sample": 8129
+    }
+  },
+  "seed": 20261013,
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  },
+  "streams": {
+    "arrival": 4,
+    "band": 5,
+    "cells": 2,
+    "dm": 3,
+    "files": 0,
+    "names": 6,
+    "redraw": 7,
+    "starts": 1
+  },
+  "tau_1250_s": 0.005
+}

@@ -1,0 +1,46 @@
+{
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e2_injection.py",
+    "render",
+    "--workers",
+    "32",
+    "--overwrite"
+  ],
+  "created_utc": "2026-10-19T18:47:16+00:00",
+  "dataset_dir": "dataset_real_e2",
+  "experiment": "E2-render",
+  "git": {
+    "commit": "0c38f3af5fc3e15e13c9d6445998da392703362a",
+    "tracked_worktree_dirty": false
+  },
+  "n_images": 2048,
+  "p0": {
+    "cmap": "viridis",
+    "dpi": 192,
+    "edge_channels": 410,
+    "freq_bins": 256,
+    "height": 768,
+    "normalization": "percentile",
+    "percentile_high": 99.0,
+    "percentile_low": 1.0,
+    "time_bins": 1024,
+    "time_factor": 20,
+    "width": 1024,
+    "window_samples": 20480,
+    "zap_sigma": 3.0
+  },
+  "plan": {
+    "path": "results_v4/e2/injection_plan.jsonl",
+    "sha256": "8203ca835a2fba1204081100e5d86c8584d3c062ddb2ea44031ab2f19e1a3c09"
+  },
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  }
+}

@@ -1,0 +1,27 @@
+ESCLARECIMENTO DA PARTE B (01/11/2026), IGUAL PARA OS DOIS AVALIADORES
+
+Houve uma dúvida sobre como separar RFI de ruído na parte B. Este texto só explica a definição
+que já está na página e não fala de nenhuma imagem. A página não muda.
+
+A pergunta da parte B é se há RFI visível na imagem. RFI é qualquer estrutura que não seja o
+ruído de fundo nem uma varredura dispersa.
+
+  - Ruído de fundo é a textura granulada e aleatória que cobre a imagem inteira: pontos mais
+    claros e mais escuros espalhados ao acaso, sem forma, sem direção e sem repetição. Se a
+    imagem só tem essa textura, a resposta é não.
+
+  - RFI é uma estrutura: algo com forma, que se destaca dessa textura. Os tipos da página:
+      Faixa horizontal persistente (banda estreita): uma linha ou faixa horizontal, numa
+        frequência fixa, que dura boa parte do tempo da imagem.
+      Impulso vertical (banda larga, sem atraso): uma linha vertical, num só instante, que
+        ocupa muitas frequências ao mesmo tempo, sem a inclinação de uma varredura dispersa.
+      Padrão periódico ou em grade: uma estrutura que se repete em intervalos regulares, no
+        tempo, na frequência ou nos dois.
+      Outro: qualquer outra estrutura que não seja a textura do ruído nem uma varredura
+        dispersa.
+    Se houver mais de um tipo, escolha o mais evidente.
+
+  - A parte B não tem confiança. Na dúvida, responda o que achar mais provável, olhando a
+    imagem inteira como a página a mostra, sem ampliar.
+
+Não comente este texto nem as imagens com o outro avaliador até os dois terminarem.

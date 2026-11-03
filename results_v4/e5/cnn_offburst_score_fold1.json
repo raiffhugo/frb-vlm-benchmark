@@ -1,0 +1,41 @@
+{
+  "checkpoint": {
+    "path": "/var/tmp/frb_svlm_e5_cnn/resnet18_fold1.pt",
+    "sha256": "0ae9e8940a238d99a9ac98c209deafb56f3278ce2fef5b43c62158de0f621c6e"
+  },
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e5_cnn.py",
+    "score-offburst",
+    "--fold",
+    "1"
+  ],
+  "created_utc": "2026-10-20T01:54:42+00:00",
+  "e3_manifest": {
+    "path": "dataset_real_e3/metadata/image_manifest.jsonl",
+    "sha256": "0a54ba1fb20e201893cca244bd63dbfc1bd322d1127e0669b7985e8204ba1bd1"
+  },
+  "experiment": "E5-CNN-offburst-score-fold1",
+  "git": {
+    "commit": "68bfbaec4f49be838647a11404466d3a0c5fa39e",
+    "tracked_worktree_dirty": false
+  },
+  "margin_s": 0.5,
+  "scores": {
+    "path": "results_v4/e5/cnn_offburst_scores_fold1.jsonl",
+    "sha256": "d349cc4f7572bdff8eba11b6ded4ea4e97c8ace7a51e3dcd490bffbec482ab3a"
+  },
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  },
+  "windows": {
+    "negative": 3000,
+    "off_burst": 647
+  }
+}

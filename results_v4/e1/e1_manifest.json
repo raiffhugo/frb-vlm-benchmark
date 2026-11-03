@@ -1,0 +1,68 @@
+{
+  "binary_composition": {
+    "by_class": {
+      "FRB": 1000,
+      "NOISE": 500,
+      "RFI": 500
+    },
+    "rfi_subtypes": {
+      "impulsive_broadband": 100,
+      "persistent_narrowband": 100,
+      "point_to_point_microwave": 100,
+      "satellite_like_inband": 100,
+      "wifi_multiband": 100
+    }
+  },
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e1_heldout.py",
+    "check"
+  ],
+  "config": {
+    "path": "config_e1.yaml",
+    "sha256": "03962834f36208b35483aa5968ebaaae77a4007c7bfeb6cd8a6dbe62740402f2",
+    "text": "# E1 (revisao v4, plano secao 10.3): conjunto simulado held-out. Identico ao\n# config.yaml do benchmark, so com seed e output_dir novos e 1000 amostras por classe.\n# Os FITS (~59 GB) ficam em /var/tmp/frb_svlm_e1/fits, via symlink dataset_e1/fits.\nname: FAST L-band sim\ntelescope: FAST\nobserver: benchmark test\nf1: 1000\nf2: 1500\nnchan: 2048\nt0: 0\nt1: 2\ntsamp: 1.96608e-4\nraj: 0\ndecj: 0\nuseAngle: 0\ngain: 0.7\ntsys: 25\nnbits: 8\nimjd: 58456\nsmjd: 36400\nlevelset: 1\noutput_dir: dataset_e1\nseed: 20260927\nn_per_class: 1000\nfrb_max_width: 0.005\n"
+  },
+  "created_utc": "2026-10-13T23:18:10+00:00",
+  "experiment": "E1-heldout-set",
+  "files": {
+    "dataset_e1/metadata/image_manifest.jsonl": "24b5d94b441539a5ae51718b3e0f96cb5706df8102d49e438d4d097c4363526a",
+    "dataset_e1/metadata/labels.jsonl": "0f4174d9e33d6208f61f00fa1006c426e1dd1097fe7b050f0928d9a02a18e39c",
+    "dataset_e1_binary/metadata/image_manifest.jsonl": "c4482b4cd49b56e8d26c3da30971c3497d6dec5abfa50fc2016909e5fbbae4f1",
+    "results_v4/e1/png_sha256.csv": "862f8198c8c82cc47c943138d26e5f5bfe9e27e5f060d39ca1451083dfe07995"
+  },
+  "git": {
+    "commit": "46d0ea04c53d660016bfff772125024bd1742c24",
+    "tracked_worktree_dirty": false
+  },
+  "multiclass_composition": {
+    "by_class": {
+      "FRB": 1000,
+      "NOISE": 1000,
+      "RFI": 1000
+    },
+    "rfi_subtypes": {
+      "impulsive_broadband": 200,
+      "persistent_narrowband": 200,
+      "point_to_point_microwave": 200,
+      "satellite_like_inband": 200,
+      "wifi_multiband": 200
+    }
+  },
+  "passed": true,
+  "seeds": {
+    "collisions_with_benchmark": 0,
+    "internal_duplicates": 0,
+    "n": 3000,
+    "replays_master_seed": true
+  },
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  }
+}

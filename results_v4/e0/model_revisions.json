@@ -1,0 +1,320 @@
+{
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e0_rebuild.py",
+    "revisions"
+  ],
+  "created_utc": "2026-10-13T22:01:35+00:00",
+  "experiment": "E0-model-revisions",
+  "git": {
+    "commit": "8b1fe3da95d84e4ac15fbefa5a15d43c64fa4bfd",
+    "tracked_worktree_dirty": false
+  },
+  "image": {
+    "path": "dataset/images/samples/sample_000000.png",
+    "sha256": "257d84c428393174adc4396cc2fba17a7d6ae19b43cab943481e20f7bd99d915"
+  },
+  "revisions": {
+    "google/gemma-4-E2B-it": [
+      {
+        "blobs": {
+          "chat_template.jinja": "07e50e69a8c445f2c31a089b828e85b2a93942bf",
+          "config.json": "923b5e9405e7d319572b0c1b1a89291512262aa3",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "2db5482b20d746879bb3ef79b5203e9075a2e2b98f54ec7c2f281c1477ddc550",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "375b25dc8be85705251e41be1c25310d24932051"
+        },
+        "first_cached_utc": 1775875320.5891025,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": false,
+        "revision": "b4a601102c3d45e2b7b50e2057a6d5ec8ed4adcf"
+      },
+      {
+        "blobs": {
+          "chat_template.jinja": "dc032e46e28e0d325b18d26da1279cdda3afa8d7",
+          "config.json": "923b5e9405e7d319572b0c1b1a89291512262aa3",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "2db5482b20d746879bb3ef79b5203e9075a2e2b98f54ec7c2f281c1477ddc550",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "375b25dc8be85705251e41be1c25310d24932051"
+        },
+        "first_cached_utc": 1777570899.7211359,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": false,
+        "revision": "b324173c7d5721c2baba7f3b17b3b9b3d34ab1e9"
+      },
+      {
+        "blobs": {
+          "chat_template.jinja": "dc032e46e28e0d325b18d26da1279cdda3afa8d7",
+          "config.json": "923b5e9405e7d319572b0c1b1a89291512262aa3",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "2db5482b20d746879bb3ef79b5203e9075a2e2b98f54ec7c2f281c1477ddc550",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "375b25dc8be85705251e41be1c25310d24932051"
+        },
+        "first_cached_utc": 1777570899.7211359,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": false,
+        "revision": "6b7e72c67d3c4556f42b56d5a68b4b8e864c63b4"
+      },
+      {
+        "blobs": {
+          "chat_template.jinja": "c19999a347da729cf62806a8ddb7eb8e315223b5",
+          "config.json": "923b5e9405e7d319572b0c1b1a89291512262aa3",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "2db5482b20d746879bb3ef79b5203e9075a2e2b98f54ec7c2f281c1477ddc550",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "375b25dc8be85705251e41be1c25310d24932051"
+        },
+        "first_cached_utc": 1779130664.9966912,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": false,
+        "revision": "70af34e20bd4b7a91f0de6b22675850c43922a03"
+      },
+      {
+        "blobs": {
+          "chat_template.jinja": "c19999a347da729cf62806a8ddb7eb8e315223b5",
+          "config.json": "923b5e9405e7d319572b0c1b1a89291512262aa3",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "2db5482b20d746879bb3ef79b5203e9075a2e2b98f54ec7c2f281c1477ddc550",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "375b25dc8be85705251e41be1c25310d24932051"
+        },
+        "first_cached_utc": 1779130664.9966912,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": false,
+        "revision": "905e84b50c4d2a365ebde34e685027578e6728db"
+      },
+      {
+        "blobs": {
+          "chat_template.jinja": "c19999a347da729cf62806a8ddb7eb8e315223b5",
+          "config.json": "923b5e9405e7d319572b0c1b1a89291512262aa3",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "2db5482b20d746879bb3ef79b5203e9075a2e2b98f54ec7c2f281c1477ddc550",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "375b25dc8be85705251e41be1c25310d24932051"
+        },
+        "first_cached_utc": 1779130664.9966912,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": false,
+        "revision": "9dbdf8a839e4e9e0eb56ed80cc8886661d3817cf"
+      },
+      {
+        "blobs": {
+          "chat_template.jinja": "fbe3b59b625cd1b8850ea592d4203df6ec04684b",
+          "config.json": "923b5e9405e7d319572b0c1b1a89291512262aa3",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "2db5482b20d746879bb3ef79b5203e9075a2e2b98f54ec7c2f281c1477ddc550",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "375b25dc8be85705251e41be1c25310d24932051"
+        },
+        "first_cached_utc": 1784161614.6839125,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": false,
+        "revision": "179516f0c449474fdc46f08f30ead5b11e178497"
+      },
+      {
+        "blobs": {
+          "chat_template.jinja": "fbe3b59b625cd1b8850ea592d4203df6ec04684b",
+          "config.json": "923b5e9405e7d319572b0c1b1a89291512262aa3",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "2db5482b20d746879bb3ef79b5203e9075a2e2b98f54ec7c2f281c1477ddc550",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "6068e357379d36f823c377e30efb101fa2c67fe4"
+        },
+        "first_cached_utc": 1786424076.40646,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": true,
+        "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7"
+      }
+    ],
+    "google/gemma-4-E4B-it": [
+      {
+        "blobs": {
+          "chat_template.jinja": "07e50e69a8c445f2c31a089b828e85b2a93942bf",
+          "config.json": "d68960fdcce766f2bfe41436325a8a483a74d125",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "cfbd3d2f1cd71bd471c37fe2bf8546d5028d41e5736f64e1ca6c6b8893125503",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "375b25dc8be85705251e41be1c25310d24932051"
+        },
+        "first_cached_utc": 1775878807.5031931,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": false,
+        "revision": "83df0a889143b1dbfc61b591bbc639540fd9ce4c"
+      },
+      {
+        "blobs": {
+          "chat_template.jinja": "dc032e46e28e0d325b18d26da1279cdda3afa8d7",
+          "config.json": "d68960fdcce766f2bfe41436325a8a483a74d125",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "cfbd3d2f1cd71bd471c37fe2bf8546d5028d41e5736f64e1ca6c6b8893125503",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "375b25dc8be85705251e41be1c25310d24932051"
+        },
+        "first_cached_utc": 1777570416.1897845,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": false,
+        "revision": "3555bddc93a623db8887dd2e52123facc45ade77"
+      },
+      {
+        "blobs": {
+          "chat_template.jinja": "dc032e46e28e0d325b18d26da1279cdda3afa8d7",
+          "config.json": "d68960fdcce766f2bfe41436325a8a483a74d125",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "cfbd3d2f1cd71bd471c37fe2bf8546d5028d41e5736f64e1ca6c6b8893125503",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "375b25dc8be85705251e41be1c25310d24932051"
+        },
+        "first_cached_utc": 1777570416.1897845,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": false,
+        "revision": "c53e9d33178b12afbad4a48334d21e19b8c29761"
+      },
+      {
+        "blobs": {
+          "chat_template.jinja": "c19999a347da729cf62806a8ddb7eb8e315223b5",
+          "config.json": "d68960fdcce766f2bfe41436325a8a483a74d125",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "cfbd3d2f1cd71bd471c37fe2bf8546d5028d41e5736f64e1ca6c6b8893125503",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "375b25dc8be85705251e41be1c25310d24932051"
+        },
+        "first_cached_utc": 1779231267.344221,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": false,
+        "revision": "fee6332c1abaafb77f6f9624236c63aa2f1d0187"
+      },
+      {
+        "blobs": {
+          "chat_template.jinja": "c19999a347da729cf62806a8ddb7eb8e315223b5",
+          "config.json": "d68960fdcce766f2bfe41436325a8a483a74d125",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "cfbd3d2f1cd71bd471c37fe2bf8546d5028d41e5736f64e1ca6c6b8893125503",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "375b25dc8be85705251e41be1c25310d24932051"
+        },
+        "first_cached_utc": 1779231267.344221,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": false,
+        "revision": "d6436b3d62967e1af08bbb046c6300b2a9ae8e85"
+      },
+      {
+        "blobs": {
+          "chat_template.jinja": "c19999a347da729cf62806a8ddb7eb8e315223b5",
+          "config.json": "d68960fdcce766f2bfe41436325a8a483a74d125",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "cfbd3d2f1cd71bd471c37fe2bf8546d5028d41e5736f64e1ca6c6b8893125503",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "375b25dc8be85705251e41be1c25310d24932051"
+        },
+        "first_cached_utc": 1779231267.344221,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": false,
+        "revision": "a4c2d58be94dda072b918d9db64ee85c8ed34e3f"
+      },
+      {
+        "blobs": {
+          "chat_template.jinja": "fbe3b59b625cd1b8850ea592d4203df6ec04684b",
+          "config.json": "d68960fdcce766f2bfe41436325a8a483a74d125",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "cfbd3d2f1cd71bd471c37fe2bf8546d5028d41e5736f64e1ca6c6b8893125503",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "375b25dc8be85705251e41be1c25310d24932051"
+        },
+        "first_cached_utc": 1784161744.142963,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": false,
+        "revision": "fa62d88df2e6df5efa9d26ad6b3beaea2765f0cd"
+      },
+      {
+        "blobs": {
+          "chat_template.jinja": "fbe3b59b625cd1b8850ea592d4203df6ec04684b",
+          "config.json": "d68960fdcce766f2bfe41436325a8a483a74d125",
+          "generation_config.json": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+          "model.safetensors": "cfbd3d2f1cd71bd471c37fe2bf8546d5028d41e5736f64e1ca6c6b8893125503",
+          "processor_config.json": "5465974d23e1eca2c46c2809b26c997946ce0d90",
+          "tokenizer.json": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+          "tokenizer_config.json": "6068e357379d36f823c377e30efb101fa2c67fe4"
+        },
+        "first_cached_utc": 1786424077.4414597,
+        "input_sha256": {
+          "frb-binary": "1bfcaef014929f1384e4b1cbc87b497486e5bf29d3a08c6d8af8631f8bc31adb",
+          "multiclass": "5439ce2967ffe5bd93af1570ba0e37a53693603aaef7e74f10893a5e033c6135"
+        },
+        "pinned_for_v4": true,
+        "revision": "ee0ef6023621cff504d758262d4e04895a5af4a2"
+      }
+    ]
+  },
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  }
+}

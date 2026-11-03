@@ -1,0 +1,35 @@
+{
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e5_cnn.py",
+    "render",
+    "--fold",
+    "1",
+    "--workers",
+    "40"
+  ],
+  "created_utc": "2026-10-19T17:34:50+00:00",
+  "experiment": "E5-CNN-render-fold1",
+  "git": {
+    "commit": "c94caf33eb2d72680580a86a4104b2088085ace6",
+    "tracked_worktree_dirty": false
+  },
+  "manifest": {
+    "path": "/var/tmp/frb_svlm_e5_cnn/fold1/metadata/image_manifest.jsonl",
+    "sha256": "4dbbd9340ce2bd23792b470a708e308e865b420dd6a13a85a897435aa80130b7"
+  },
+  "n_images": 10000,
+  "plan": {
+    "path": "results_v4/e5/cnn_plan.jsonl",
+    "sha256": "c16f11041a63698146ccc489b5b1208ad279608422ad7e52a376db6c5306617e"
+  },
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  }
+}

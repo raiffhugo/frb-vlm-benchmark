@@ -1,0 +1,261 @@
+{
+  "bootstrap": {
+    "iterations": 10000,
+    "seed": 42
+  },
+  "clarification_descriptive": {
+    "answers_before": {
+      "A": 0,
+      "B": 0
+    },
+    "clarified_utc": {
+      "A": "2026-11-01T15:43:00+00:00",
+      "B": "2026-11-02T17:04:17.071000+00:00"
+    },
+    "consensus_after": {
+      "count": 62,
+      "estimate": 0.31,
+      "high": 0.37717177566258037,
+      "low": 0.2499894483607809
+    },
+    "images_both_after": 200,
+    "kappa_after": {
+      "agreement": 0.665,
+      "estimate": 0.35836046734342086,
+      "failed_resamples": 0,
+      "high": 0.47074519554109967,
+      "low": 0.24038461538461536,
+      "n": 200
+    }
+  },
+  "command": [
+    "/home/raiffhugo/frb_svlm/revision_v4/e5_humans.py",
+    "analyze"
+  ],
+  "created_utc": "2026-11-02T23:14:39+00:00",
+  "experiment": "E4-audit-analysis",
+  "first_answers_descriptive": {
+    "c6_number": {
+      "count": 52,
+      "estimate": 0.26,
+      "high": 0.32490745602534116,
+      "low": 0.20413830063574687,
+      "reader": "consensus"
+    },
+    "kappa": {
+      "agreement": 0.58,
+      "estimate": 0.24002533248891694,
+      "failed_resamples": 0,
+      "high": 0.3434436841131866,
+      "low": 0.13792728048099268,
+      "n": 200
+    },
+    "visible_rfi": {
+      "A": {
+        "count": 61,
+        "estimate": 0.305,
+        "high": 0.37198552097978366,
+        "low": 0.24536415630735034
+      },
+      "B": {
+        "count": 127,
+        "estimate": 0.635,
+        "high": 0.698594735350732,
+        "low": 0.566317026527406
+      },
+      "consensus": {
+        "count": 52,
+        "estimate": 0.26,
+        "high": 0.32490745602534116,
+        "low": 0.20413830063574687
+      },
+      "union": {
+        "count": 136,
+        "estimate": 0.68,
+        "high": 0.7407346668453195,
+        "low": 0.6124810156588646
+      }
+    }
+  },
+  "git": {
+    "commit": "59818ded4bb071787d55d2b424f7c6f29d1ef2a2",
+    "tracked_worktree_dirty": false
+  },
+  "inputs": {
+    "cnn_offburst": {
+      "path": "results_v4/e5/cnn_offburst_results.json",
+      "sha256": "fc9485021bd2c0477cf8bb43e0171d680dda6521fae5476e97a55e084f8ff328"
+    },
+    "cnn_results": {
+      "path": "results_v4/e5/cnn_results.json",
+      "sha256": "61f933a8fca1b8d7b3cd9417046f1ae1f44c8b5bb03cfe62dbe1872fbe8d1946"
+    },
+    "key": {
+      "path": "results_v4/e5/labeling_key.jsonl",
+      "sha256": "b742b26ddea57f3f0d8af3f8c0c18dfd0df7aee470364da2ae0676425e6eee9b"
+    },
+    "ratings": {
+      "A": {
+        "answers": {
+          "A": 300,
+          "B": 200,
+          "treino": 10
+        },
+        "changed": {
+          "A": 0,
+          "B": 21,
+          "treino": 0
+        },
+        "format": 2,
+        "path": "results_v4/e5/ratings/rotulacao_avaliador_A.csv",
+        "repeated_ignored": {
+          "A": 0,
+          "B": 0,
+          "treino": 0
+        },
+        "sha256": "1b37de6845b32b23e5b476612565bbd70d7d9f56ea18f02881fb1d3a2b410c06"
+      },
+      "B": {
+        "answers": {
+          "A": 300,
+          "B": 200,
+          "treino": 10
+        },
+        "changed": {
+          "A": 7,
+          "B": 20,
+          "treino": 0
+        },
+        "format": 2,
+        "path": "results_v4/e5/ratings/rotulacao_avaliador_B.csv",
+        "repeated_ignored": {
+          "A": 0,
+          "B": 0,
+          "treino": 0
+        },
+        "sha256": "21f73ffdd5bf316b365982983ee17b91122f2c879a8a8b5b5319211875bf1215"
+      }
+    },
+    "vlm_predictions": {
+      "e2b": {
+        "path": "results_real_binary_full_2b/predictions.jsonl",
+        "sha256": "cae7f0c85a3c963d17c00983df74389937707b5363fc1987b1453be0e5872a08"
+      },
+      "e4b": {
+        "path": "results_real_binary_full_4b/predictions.jsonl",
+        "sha256": "0728da73b519dd0690d1011bf319f3cb9a285e6731b10ecfb93678847dfc2d03"
+      }
+    }
+  },
+  "part_b": {
+    "c6_number": {
+      "count": 62,
+      "estimate": 0.31,
+      "high": 0.37717177566258037,
+      "low": 0.2499894483607809,
+      "reader": "consensus"
+    },
+    "kappa": {
+      "agreement": 0.665,
+      "estimate": 0.35836046734342086,
+      "failed_resamples": 0,
+      "high": 0.47074519554109967,
+      "low": 0.24038461538461536,
+      "n": 200
+    },
+    "n": 200,
+    "types_by_rater": {
+      "A": {
+        "horizontal": 30,
+        "other": 16,
+        "periodic": 5,
+        "vertical": 23
+      },
+      "B": {
+        "horizontal": 69,
+        "other": 0,
+        "periodic": 32,
+        "vertical": 16
+      }
+    },
+    "types_consensus": {
+      "discordant": 45,
+      "horizontal": 6,
+      "other": 0,
+      "periodic": 1,
+      "vertical": 10
+    },
+    "visible_rfi": {
+      "A": {
+        "count": 74,
+        "estimate": 0.37,
+        "high": 0.4387737007594981,
+        "low": 0.30612608409859116
+      },
+      "B": {
+        "count": 117,
+        "estimate": 0.585,
+        "high": 0.6510571455024242,
+        "low": 0.5157391490134403
+      },
+      "consensus": {
+        "count": 62,
+        "estimate": 0.31,
+        "high": 0.37717177566258037,
+        "low": 0.2499894483607809
+      },
+      "union": {
+        "count": 129,
+        "estimate": 0.645,
+        "high": 0.7080137245956883,
+        "low": 0.5765211307549043
+      }
+    },
+    "vlm_false_positives_descriptive": {
+      "e2b": {
+        "P0": {
+          "all": 0,
+          "consensus_visible_rfi": 0,
+          "others": 0
+        },
+        "P1": {
+          "all": 3,
+          "consensus_visible_rfi": 0,
+          "others": 3
+        },
+        "P2": {
+          "all": 0,
+          "consensus_visible_rfi": 0,
+          "others": 0
+        }
+      },
+      "e4b": {
+        "P0": {
+          "all": 0,
+          "consensus_visible_rfi": 0,
+          "others": 0
+        },
+        "P1": {
+          "all": 0,
+          "consensus_visible_rfi": 0,
+          "others": 0
+        },
+        "P2": {
+          "all": 0,
+          "consensus_visible_rfi": 0,
+          "others": 0
+        }
+      }
+    }
+  },
+  "software_versions": {
+    "astropy": "7.2.0",
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pillow": "12.2.0",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "torch": "2.11.0",
+    "transformers": "5.7.0"
+  }
+}

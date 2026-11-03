@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import importlib.metadata
 import json
 import logging
 import os
@@ -24,9 +25,15 @@ class BaseVLM(ABC):
     def classify(self, *, image_path: Path, prompt: str, sample_id: str) -> str:
         """Return the raw model response as text."""
 
+    def provenance(self) -> dict[str, Any]:
+        return {
+            "model_class": f"{type(self).__module__}.{type(self).__qualname__}",
+        }
+
 
 class DryRunVLM(BaseVLM):
     def __init__(self, *, seed: int, labels: Sequence[str] = VALID_LABELS) -> None:
+        self.seed = seed
         self._rng = random.Random(seed)
         if not labels:
             raise ValueError("labels must not be empty.")
@@ -48,6 +55,24 @@ class DryRunVLM(BaseVLM):
             response["frb_probability"] = frb_probability
             response["confidence"] = round(max(frb_probability, 1.0 - frb_probability), 4)
         return json.dumps(response, sort_keys=True)
+
+    def provenance(self) -> dict[str, Any]:
+        provenance = super().provenance()
+        provenance.update(
+            {
+                "mode": "dry-run",
+                "seed": self.seed,
+                "labels": list(self.labels),
+            }
+        )
+        return provenance
+
+
+def _installed_version(package: str) -> str | None:
+    try:
+        return importlib.metadata.version(package)
+    except importlib.metadata.PackageNotFoundError:
+        return None
 
 
 def resolve_gemma4_model_id(model_name: str | None) -> str:
@@ -100,6 +125,7 @@ class Gemma4VLM(BaseVLM):
         self,
         *,
         model_name: str = DEFAULT_GEMMA4_MODEL_ID,
+        revision: str | None = None,
         device_map: str = "auto",
         dtype: str = "auto",
         max_new_tokens: int = 1024,
@@ -122,6 +148,7 @@ class Gemma4VLM(BaseVLM):
             raise ValueError("top_k must be > 0 when provided.")
 
         self.model_id = resolve_gemma4_model_id(model_name)
+        self.revision = _none_if_disabled(revision)
         self.device_map = device_map
         self.dtype = _none_if_disabled(dtype)
         self.max_new_tokens = max_new_tokens
@@ -137,6 +164,45 @@ class Gemma4VLM(BaseVLM):
         self.model: Any | None = None
 
         self.load()
+
+    def provenance(self) -> dict[str, Any]:
+        provenance = super().provenance()
+        provenance.update(
+            {
+                "model_id": self.model_id,
+                "requested_revision": self.revision,
+                "model_revision": getattr(
+                    getattr(self.model, "config", None),
+                    "_commit_hash",
+                    None,
+                ),
+                "processor_class": (
+                    f"{type(self.processor).__module__}."
+                    f"{type(self.processor).__qualname__}"
+                    if self.processor is not None
+                    else None
+                ),
+                "software_versions": {
+                    package: _installed_version(package)
+                    for package in ("torch", "transformers", "pillow")
+                },
+                "device_map": self.device_map,
+                "dtype": self.dtype,
+                "attention_implementation": self.attn_implementation,
+                "generation": {
+                    **build_generation_kwargs(
+                        max_new_tokens=self.max_new_tokens,
+                        cache_implementation=self.cache_implementation,
+                        do_sample=self.do_sample,
+                        temperature=self.temperature,
+                        top_p=self.top_p,
+                        top_k=self.top_k,
+                    ),
+                    "seed": self.seed,
+                },
+            }
+        )
+        return provenance
 
     def load(self) -> None:
         if self.processor is not None and self.model is not None:
@@ -156,6 +222,8 @@ class Gemma4VLM(BaseVLM):
             login(token=token)
 
         model_kwargs: dict[str, Any] = {"device_map": self.device_map}
+        if self.revision is not None:
+            model_kwargs["revision"] = self.revision
         if self.dtype is not None:
             model_kwargs["dtype"] = self.dtype
         if self.attn_implementation is not None:
@@ -171,9 +239,12 @@ class Gemma4VLM(BaseVLM):
             self.top_k if self.do_sample else None,
             self.seed,
         )
+        processor_kwargs: dict[str, Any] = {"padding_side": "left"}
+        if self.revision is not None:
+            processor_kwargs["revision"] = self.revision
         self.processor = AutoProcessor.from_pretrained(
             self.model_id,
-            padding_side="left",
+            **processor_kwargs,
         )
         self.model = AutoModelForImageTextToText.from_pretrained(
             self.model_id,

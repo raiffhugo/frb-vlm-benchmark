@@ -1,0 +1,26 @@
+# E1 (revisao v4, plano secao 10.3): conjunto simulado held-out. Identico ao
+# config.yaml do benchmark, so com seed e output_dir novos e 1000 amostras por classe.
+# Os FITS (~59 GB) ficam em /var/tmp/frb_svlm_e1/fits, via symlink dataset_e1/fits.
+# Esta variante so aponta o export-benchmark para dataset_e1_binary/metadata/labels.jsonl.
+name: FAST L-band sim
+telescope: FAST
+observer: benchmark test
+f1: 1000
+f2: 1500
+nchan: 2048
+t0: 0
+t1: 2
+tsamp: 1.96608e-4
+raj: 0
+decj: 0
+useAngle: 0
+gain: 0.7
+tsys: 25
+nbits: 8
+imjd: 58456
+smjd: 36400
+levelset: 1
+output_dir: dataset_e1_binary
+seed: 20260927
+n_per_class: 1000
+frb_max_width: 0.005

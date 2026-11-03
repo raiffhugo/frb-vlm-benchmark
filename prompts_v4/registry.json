@@ -1,0 +1,92 @@
+{
+  "binary_full": {
+    "file": "prompts_v4/binary_full.txt",
+    "sha256": "0fa6d5d3ed96b79b7920e9eeed3e4e87b474a83d30cd965e7c70f83931b9cb21",
+    "origin": "vlm_classifier/prompt.py:BINARY_FRB_PROMPT (prompt binario do artigo, congelado em d8b6f88)",
+    "frozen": "2026-10-13"
+  },
+  "binary_lean": {
+    "file": "prompts_v4/binary_lean.txt",
+    "sha256": "53c527558e4cb7cb66468b00874814dc4432105e3c121339d9faacc60bfa3556",
+    "origin": "prompt_timing_experiment.py:LEAN_BINARY_PROMPT (Tabela 10)",
+    "frozen": "2026-10-13"
+  },
+  "binary_lean_reason": {
+    "file": "prompts_v4/binary_lean_reason.txt",
+    "sha256": "1692291fe3b25a82b867afa5ae080515b66a5008a09d5a5ef06dfc8225de4439",
+    "origin": "prompt_timing_experiment.py:LEAN_REASON_BINARY_PROMPT (Tabela 10)",
+    "frozen": "2026-10-13"
+  },
+  "multiclass": {
+    "file": "prompts_v4/multiclass.txt",
+    "sha256": "09abe0c9dff1992b23a0448a7216eb6b8fe111e3fad98f7d4de35a61ed226fb1",
+    "origin": "vlm_classifier/prompt.py:CLASSIFICATION_PROMPT (revisado em 03/07, 5d0647a)",
+    "frozen": "2026-10-13"
+  },
+  "e6_pa_paraphrase": {
+    "file": "prompts_v4/e6_pa_paraphrase.txt",
+    "sha256": "83d14b14ca55203197b34582f309da5fe9e90a1131922050a060234283447c64",
+    "origin": "revision_v4/e6_prompts.py (P-a: mesmas regras, redacao nova), a partir de binary_full",
+    "frozen": "2026-10-19"
+  },
+  "e6_pb_non_frb_first": {
+    "file": "prompts_v4/e6_pb_non_frb_first.txt",
+    "sha256": "c37441c7f1061730a3c9b331cdacf085dc18c732715f2b4a821b4b5edecbbef8",
+    "origin": "revision_v4/e6_prompts.py (P-b: mesmas regras, lista de NON_FRB primeiro), a partir de binary_full",
+    "frozen": "2026-10-19"
+  },
+  "e6_pc_short": {
+    "file": "prompts_v4/e6_pc_short.txt",
+    "sha256": "223112cab4e155830947baa23ce49a46289ced9be3ec55e80f6e3ae51b4ed731",
+    "origin": "revision_v4/e6_prompts.py (P-c: ~50% dos tokens, mesmas regras), a partir de binary_full",
+    "frozen": "2026-10-19"
+  },
+  "e6_pd_generic_non_frb": {
+    "file": "prompts_v4/e6_pd_generic_non_frb.txt",
+    "sha256": "856bc54a522a5fb6acfc98e1c871c1ec604aee8212d3644811a2f65c05f6bf6c",
+    "origin": "revision_v4/e6_prompts.py (P-d: NON_FRB generico, sem as familias de RFI), a partir de binary_full",
+    "frozen": "2026-10-19"
+  },
+  "e6_pe_no_low_snr": {
+    "file": "prompts_v4/e6_pe_no_low_snr.txt",
+    "sha256": "2c4e34be08f498f916b9be44f3a3f5c9965d6c31ebd52be3b7620c32f51e8dc3",
+    "origin": "revision_v4/e6_prompts.py (P-e: sem a clausula Low-S/N), a partir de binary_full",
+    "frozen": "2026-10-19"
+  },
+  "e6_r_relaxed_morphology": {
+    "file": "prompts_v4/e6_r_relaxed_morphology.txt",
+    "sha256": "9e070d6c5b86cacc4b72d7e4e6adf02e79ae1357601ba1a1eded12a5e9a2ae58",
+    "origin": "revision_v4/e6_prompts.py (R: morfologia relaxada), a partir de binary_full",
+    "frozen": "2026-10-19"
+  },
+  "e7_v1o_no_reason": {
+    "file": "prompts_v4/e7_v1o_no_reason.txt",
+    "sha256": "eac51fb4336527ce0b9268cb6a653a7857d55523e0ca3d177290a29d54f9b738",
+    "origin": "revision_v4/e7_prompts.py (V1o: V2 sem a justificativa, mesma ordem dos campos de decisao), a partir de binary_lean_reason",
+    "frozen": "2026-10-19"
+  },
+  "e7_v3_reason_after": {
+    "file": "prompts_v4/e7_v3_reason_after.txt",
+    "sha256": "a3cb519444238e1a09a2778d5bf2a98ce2a5262a826e9de00ec2fd83df24f2ba",
+    "origin": "revision_v4/e7_prompts.py (V3: justificativa depois dos campos de decisao), a partir de binary_lean_reason",
+    "frozen": "2026-10-19"
+  },
+  "e7_v5_reason_reworded": {
+    "file": "prompts_v4/e7_v5_reason_reworded.txt",
+    "sha256": "55b1328d911f7d63c766449ab15f66895111996c2bf054ec24ff8a18c14e3824",
+    "origin": "revision_v4/e7_prompts.py (V5: instrucao de justificativa reescrita), a partir de binary_lean_reason",
+    "frozen": "2026-10-19"
+  },
+  "e7_v4_filler_e2b": {
+    "file": "prompts_v4/e7_v4_filler_e2b.txt",
+    "sha256": "b1487a1de22ef926258869aa2a6ad43bddbc276f9cf2fc1240ebf05b28ca0da4",
+    "origin": "revision_v4/e7_prompts.py (V4 do E2B: filler de 21 tokens antes dos campos), a partir de binary_lean_reason",
+    "frozen": "2026-10-19"
+  },
+  "e7_v4_filler_e4b": {
+    "file": "prompts_v4/e7_v4_filler_e4b.txt",
+    "sha256": "ee451d7cfd6f5697849aac2adab229fa9356384ce12680b674e340d7049b24c0",
+    "origin": "revision_v4/e7_prompts.py (V4 do E4B: filler de 24 tokens antes dos campos), a partir de binary_lean_reason",
+    "frozen": "2026-10-19"
+  }
+}
