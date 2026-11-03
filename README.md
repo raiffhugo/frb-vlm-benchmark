@@ -1,5 +1,7 @@
 # frb-vlm-benchmark
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22240219.svg)](https://doi.org/10.5281/zenodo.22240219)
+
 Code and evaluation artifacts for the paper:
 
 > **Generalist Vision-Language Models for Fast Radio Burst detection: a zero-shot benchmark against a specialized detector**
@@ -495,6 +497,8 @@ uv run python -m unittest discover -s tests
 One test is skipped unless the optional `real` extra (`your`) is installed. `tests/e2e_labeling_tool.mjs` drives the rating interface end to end in headless Chrome (Node 22 or later); see its header for usage.
 
 ## Citation
+
+The code and artifacts are archived on Zenodo under [10.5281/zenodo.22240219](https://doi.org/10.5281/zenodo.22240219), which always resolves to the latest release; the revised manuscript cites v1.2 ([10.5281/zenodo.23903348](https://doi.org/10.5281/zenodo.23903348)).
 
 If you use this code or the benchmark artifacts, please cite:
 
